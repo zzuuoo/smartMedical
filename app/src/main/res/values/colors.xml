@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+        <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#ff4081</color>
+    <color name="green">#98FB98</color>
+
+    <color name="timeline_line">#e46d6d</color>
+    <color name="primaryBlack">#000000</color>
+
+    <color name="primaryBlue">#3F51B5</color>
+    <color name="DarkPrimaryBlue">#00796B</color>
+    <color name="AccentBlue">#00BCD4</color>
+    <color name="LightBlue">#B2DFDB</color>
+    <color name="SecondaryText">#757575</color>
+    <color name="DividerColor">#BDBDBD</color>
+    <color name="huise">#f0f0f0</color>
+</resources>
