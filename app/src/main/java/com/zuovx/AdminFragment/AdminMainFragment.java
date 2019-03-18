@@ -21,7 +21,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.zuovx.Activity.ChooseDoctorActivity;
+import com.zuovx.Activity.DoctorManagerActivity;
 import com.zuovx.Adapter.SectionAdapter;
 import com.zuovx.Model.Section;
 import com.zuovx.R;
@@ -112,7 +112,7 @@ public class AdminMainFragment extends Fragment implements View.OnClickListener 
                 }else{
                     section = sections.get(i);
                 }
-                Intent intent = new Intent(getActivity(),ChooseDoctorActivity.class);
+                Intent intent = new Intent(getActivity(),DoctorManagerActivity.class);
                 intent.putExtra("sectionId",section.getSectionId());
                 startActivity(intent);
 //                Toast.makeText(getApplicationContext(),section.getSectionName(),Toast.LENGTH_SHORT).show();

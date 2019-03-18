@@ -44,8 +44,10 @@
         <activity
             android:name=".Activity.DoctorActivity"
             android:launchMode="singleInstance" />
-        <activity android:name=".Activity.AdminActivity"
-            android:launchMode="singleInstance"></activity>
+        <activity
+            android:name=".Activity.AdminActivity"
+            android:launchMode="singleInstance" />
+        <activity android:name=".Activity.DoctorManagerActivity"></activity>
     </application>
 
 </manifest>
