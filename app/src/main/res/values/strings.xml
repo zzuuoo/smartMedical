@@ -1,5 +1,19 @@
 <resources>
     <string name="app_name">智慧医疗</string>
+    <!--<string name="cancel">取消</string>-->
+    <string name="title">请选择时间</string>
+    <string name="confirm">确定</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="hour">时</string>
+    <string name="minute">分</string>
+
+    <!--<string name="app_name">日期选择控件</string>-->
+    <string name="select_date">选择日期</string>
+    <string name="current_date">当前日期</string>
+    <string name="select_time">选择时间</string>
+    <string name="current_time">当前时间</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="email">邮箱</string>

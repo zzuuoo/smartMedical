@@ -1,6 +1,8 @@
 package com.zuovx.Model;
 
-public class Doctor {
+import java.io.Serializable;
+
+public class Doctor implements Serializable {
     private int doctorId;
     private String account;//账号,6位以上,外键，手机作为账号
     private String name;//名字

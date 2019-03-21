@@ -140,23 +140,16 @@ public class DoctorManagerActivity extends AppCompatActivity implements View.OnC
         ls.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Employee e=null;
-//                User u = null;
-//                if(isSearch){
-//                    u=userSearchList.get(i);
-//                }else{
-//                    u=userList.get(i);
-//                }
-//                for(Employee employee:empList){
-//                    if(employee.getEmp_no().equals(u.getEmp_no())){
-//                        e=employee;
-//                    }
-//                }
-//                Intent intent = new Intent(UserManageActivity.this,EditUserActivity.class);
-//                intent.putExtra("user",u);
-//                intent.putExtra("employee",e);
-//                startActivityForResult(intent,2);
-//                Toast.makeText(getApplicationContext(),empList.get(i).getEmp_name(),Toast.LENGTH_SHORT).show();
+                Doctor d;
+                if(isSearch){
+                    d=doctorSearchList.get(i);
+                }else{
+                    d=doctors.get(i);
+                }
+                Intent intent = new Intent(DoctorManagerActivity.this,ScheduleManagerActivity.class);
+                intent.putExtra("doctor",d);
+                startActivity(intent);
+                Toast.makeText(getApplicationContext(),d.getName(),Toast.LENGTH_SHORT).show();
             }
         });
 
