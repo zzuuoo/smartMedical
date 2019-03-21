@@ -52,7 +52,7 @@ public class LVCircularRing extends View {
         mPaint.setColor(Color.WHITE);
         RectF rectF = new RectF(mPadding, mPadding, mWidth - mPadding, mWidth - mPadding);
         canvas.drawArc(rectF, startAngle, 100
-                , false, mPaint);//第四个参数是否显示半径
+                , false, mPaint);
 
     }
 
@@ -86,7 +86,7 @@ public class LVCircularRing extends View {
 
         valueAnimator.setDuration(time);
         valueAnimator.setInterpolator(new LinearInterpolator());
-        valueAnimator.setRepeatCount(ValueAnimator.INFINITE);//无限循环
+        valueAnimator.setRepeatCount(ValueAnimator.INFINITE);//
         valueAnimator.setRepeatMode(ValueAnimator.RESTART);//
 
         valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
