@@ -13,6 +13,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -28,7 +29,12 @@ import com.zuovx.Utils.LoadingDialog;
 import com.zuovx.datePicker.CustomDatePicker;
 import com.zuovx.datePicker.DateFormatUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ScheduleManagerActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -166,7 +172,12 @@ public class ScheduleManagerActivity extends AppCompatActivity implements View.O
                 mDatePicker.show(mTvSelectedDate.getText().toString());
                 break;
             case R.id.sure_editschedule:
-                MakeSchedule();
+//                MakeSchedule();
+                try {
+                    PostWithVolley();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 //                finish();
                 break;
             case R.id.cancel_editschedule:
@@ -180,5 +191,59 @@ public class ScheduleManagerActivity extends AppCompatActivity implements View.O
         String s = spinnerTime.getSelectedItem().toString();
         String remainder = scheduleRemainder.getText().toString();
         Toast.makeText(this,s+t+remainder,Toast.LENGTH_SHORT).show();
+    }
+    private void PostWithVolley() throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        String date = mTvSelectedDate.getText().toString();
+        Date d = format.parse(date);
+        final long ld = d.getTime();
+        String when = spinnerTime.getSelectedItem().toString();
+        final String remainder = scheduleRemainder.getText().toString();
+        final  String w ;
+        if(when.equals("全天")){
+            w="0";
+        }else if(when.equals("上午")){
+            w = "1";
+        }else{
+            w = "2";
+        }
+        requestQueue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(
+                com.android.volley.Request.Method.POST,
+                GlobalVar.url + "schedule/arrangeSchedule",
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        System.out.println(s);
+
+//                Message message1 = new Message();
+//                message1.what = 3;
+//                handler.sendMessage(message1);
+
+                    }
+                }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+//                Message message1 = new Message();
+//                message1.what = 3;
+//                handler.sendMessage(message1);
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("doctorId", String.valueOf(doctor.getDoctorId()));
+                map.put("w", w);
+                map.put("remainder",remainder);
+                map.put("workTimeStart",String.valueOf(ld));
+                map.put("isCancle","false");
+                return map;
+            }
+
+        };
+
+        requestQueue.add(stringRequest);
     }
 }
