@@ -8,6 +8,10 @@ public class Section {
     private String sectionName;
     private String sectionIntroduction;
 
+    public String toString(){
+        return sectionName;
+    }
+
     public int getSectionId() {
         return sectionId;
     }

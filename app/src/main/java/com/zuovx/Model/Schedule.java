@@ -10,5 +10,6 @@ public class Schedule {
     private int remainder;
     private long workTimeStart;
     private boolean isCancle;
+//    private int when;//0 全天 1 上午 2 下午
 
 }
