@@ -95,6 +95,7 @@
             android:textSize="20dp" />
         <TextView
             android:layout_marginLeft="10dp"
+            android:id="@+id/appointCount"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="余号：40"

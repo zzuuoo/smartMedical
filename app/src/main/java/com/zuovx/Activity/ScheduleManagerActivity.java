@@ -2,25 +2,21 @@ package com.zuovx.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.zuovx.Model.Doctor;
 import com.zuovx.Model.Section;
 import com.zuovx.R;
@@ -45,11 +41,13 @@ public class ScheduleManagerActivity extends AppCompatActivity implements View.O
     private RequestQueue requestQueue;
     private LoadingDialog loadingDialog;
     private List<Section> sections;
-    private Spinner spinnerSection;
+//    private Spinner spinnerSection;
     private Spinner spinnerTime;
     private Doctor doctor;
     private Button cancle,sure;
     private Toolbar toolbar;
+    Handler handler;
+    private LoadingDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +56,25 @@ public class ScheduleManagerActivity extends AppCompatActivity implements View.O
         Intent intent = this.getIntent();
         doctor = (Doctor) intent.getSerializableExtra("doctor");
         initDatePicker();
+        handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what)
+                {
+                    case 1:
+                        ScheduleManagerActivity.this.setResult(1);
+                        dialog.close();
+//                        Toast.makeText(EditScheduleActivity.this,"生成票成功",Toast.LENGTH_SHORT).show();
+                        finish();
+                        break;
+                    case 2:
+                        ScheduleManagerActivity.this.setResult(-1);
+                        dialog.close();
+                        finish();
+                        break;
+                }
+            }
+        };
 //        getSection();
     }
     public void init(){
@@ -85,55 +102,55 @@ public class ScheduleManagerActivity extends AppCompatActivity implements View.O
         String[] time ={"全天","上午","下午"};
         spinnerTime.setAdapter(new ArrayAdapter<String>(ScheduleManagerActivity.this,android.R.layout.simple_spinner_item,time));
     }
-    public void getSection(){
-        //创建一个请求队列
-
-//        listView = (ListView)findViewById(R.id.book_section_list);
-        loadingDialog = new LoadingDialog(this,"数据读取中");
-        loadingDialog.show();
-        requestQueue = Volley.newRequestQueue(this);
-        //创建一个请求
-
-        StringRequest stringRequest =new StringRequest(GlobalVar.url +"section/getAllSection", new Response.Listener<String>() {
-            //正确接收数据回调
-            @Override
-            public void onResponse(String s) {
-                try {
-                    Gson gson = new Gson();
-                    sections = gson.fromJson(s, new TypeToken<List<Section>>() {}.getType());
-
-                    Log.d("sections:",sections.toString());
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                arrayAdapterSection = new ArrayAdapter<Section>(ScheduleManagerActivity.this,android.R.layout.simple_spinner_item,sections);
-                spinnerSection.setAdapter(arrayAdapterSection);
-                SpinnerAdapter spinnerPAdapter = spinnerSection.getAdapter();
-                int k = spinnerPAdapter.getCount();
-                for(int i=0;i<k;i++)
-                {
-                    if(doctor.getSectionId()==((Section)spinnerPAdapter.getItem(i)).getSectionId()){
-                        spinnerSection.setSelection(i,true);
-                        break;
-                    }
-                }
-                loadingDialog.close();
-
-
-            }
-        }, new Response.ErrorListener() {//异常后的监听数据
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-//                volley_result.setText("加载错误"+volleyError);
-                loadingDialog.close();
-//                textView.setVisibility(View.VISIBLE);
-            }
-        });
-        //将get请求添加到队列中
-        requestQueue.add(stringRequest);
-    }
+//    public void getSection(){
+//        //创建一个请求队列
+//
+////        listView = (ListView)findViewById(R.id.book_section_list);
+//        loadingDialog = new LoadingDialog(this,"数据读取中");
+//        loadingDialog.show();
+//        requestQueue = Volley.newRequestQueue(this);
+//        //创建一个请求
+//
+//        StringRequest stringRequest =new StringRequest(GlobalVar.url +"section/getAllSection", new Response.Listener<String>() {
+//            //正确接收数据回调
+//            @Override
+//            public void onResponse(String s) {
+//                try {
+//                    Gson gson = new Gson();
+//                    sections = gson.fromJson(s, new TypeToken<List<Section>>() {}.getType());
+//
+//                    Log.d("sections:",sections.toString());
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//
+//                arrayAdapterSection = new ArrayAdapter<Section>(ScheduleManagerActivity.this,android.R.layout.simple_spinner_item,sections);
+//                spinnerSection.setAdapter(arrayAdapterSection);
+//                SpinnerAdapter spinnerPAdapter = spinnerSection.getAdapter();
+//                int k = spinnerPAdapter.getCount();
+//                for(int i=0;i<k;i++)
+//                {
+//                    if(doctor.getSectionId()==((Section)spinnerPAdapter.getItem(i)).getSectionId()){
+//                        spinnerSection.setSelection(i,true);
+//                        break;
+//                    }
+//                }
+//                loadingDialog.close();
+//
+//
+//            }
+//        }, new Response.ErrorListener() {//异常后的监听数据
+//            @Override
+//            public void onErrorResponse(VolleyError volleyError) {
+////                volley_result.setText("加载错误"+volleyError);
+//                loadingDialog.close();
+////                textView.setVisibility(View.VISIBLE);
+//            }
+//        });
+//        //将get请求添加到队列中
+//        requestQueue.add(stringRequest);
+//    }
     private void initDatePicker() {
 
 //        long beginTimestamp = DateFormatUtils.str2Long("2009-05-01", false);
@@ -186,12 +203,7 @@ public class ScheduleManagerActivity extends AppCompatActivity implements View.O
         }
     }
 
-    private void MakeSchedule(){
-        String t = mTvSelectedDate.getText().toString();
-        String s = spinnerTime.getSelectedItem().toString();
-        String remainder = scheduleRemainder.getText().toString();
-        Toast.makeText(this,s+t+remainder,Toast.LENGTH_SHORT).show();
-    }
+
     private void PostWithVolley() throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -208,6 +220,8 @@ public class ScheduleManagerActivity extends AppCompatActivity implements View.O
         }else{
             w = "2";
         }
+        dialog = new LoadingDialog(ScheduleManagerActivity.this,"加载中,,,");
+        dialog.show();
         requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(
                 com.android.volley.Request.Method.POST,
@@ -215,20 +229,25 @@ public class ScheduleManagerActivity extends AppCompatActivity implements View.O
                 new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
-                        System.out.println(s);
+                        if(s.equals("1")){
+                            Message message1 = new Message();
+                            message1.what = 1;
+                            handler.sendMessage(message1);
+                        }else{
+                            Message message1 = new Message();
+                            message1.what = 2;
+                            handler.sendMessage(message1);
+                        }
 
-//                Message message1 = new Message();
-//                message1.what = 3;
-//                handler.sendMessage(message1);
 
                     }
                 }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
 
-//                Message message1 = new Message();
-//                message1.what = 3;
-//                handler.sendMessage(message1);
+                Message message1 = new Message();
+                message1.what = 2;
+                handler.sendMessage(message1);
             }
         }) {
             @Override
