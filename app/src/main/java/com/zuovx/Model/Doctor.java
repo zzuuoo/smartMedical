@@ -11,10 +11,20 @@ public class Doctor implements Serializable {
     private String idNumber;//身份证号码
     private String phone;//电话
     private String address;//地址
+    private String honour;//头衔
 
 
     private String introduction;//医生简介
     private String forte;//特长
+
+    public String getHonour() {
+        return honour;
+    }
+
+    public void setHonour(String honour) {
+        this.honour = honour;
+    }
+
     private int sectionId;//属于哪个科室
 
 

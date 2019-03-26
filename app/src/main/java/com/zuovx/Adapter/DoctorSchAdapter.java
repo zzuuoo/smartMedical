@@ -9,16 +9,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.zuovx.Model.Doctor;
+import com.zuovx.Model.DoctorSche;
 import com.zuovx.R;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class DoctorAdapter extends ArrayAdapter<Doctor> {
+public class DoctorSchAdapter extends ArrayAdapter<DoctorSche> {
     static class ViewHolder{
         ImageView doctoeHead;
         TextView doctorName;
-//        TextView appointCount;
+        TextView appointCount;
         TextView doctorPosition;
         TextView doctorForteAndIntroduction;
         TextView doctorWorkTime;
@@ -26,7 +27,7 @@ public class DoctorAdapter extends ArrayAdapter<Doctor> {
     }
 
     private int resourceId;
-    public DoctorAdapter(@NonNull Context context, int resource, @NonNull List<Doctor> objects) {
+    public DoctorSchAdapter(@NonNull Context context, int resource, @NonNull List<DoctorSche> objects) {
         super(context, resource, objects);
         this.resourceId = resource;
     }
@@ -34,7 +35,7 @@ public class DoctorAdapter extends ArrayAdapter<Doctor> {
     public View getView(int position, View convertView, ViewGroup parent)
     {
         ViewHolder holder;
-        Doctor doctor = getItem(position);
+        DoctorSche doctorSche = getItem(position);
         View view;
         if(convertView==null)
         {
@@ -43,6 +44,7 @@ public class DoctorAdapter extends ArrayAdapter<Doctor> {
             holder = new ViewHolder();
             holder.doctorName = view.findViewById(R.id.doctorName);
             holder.doctoeHead = view.findViewById(R.id.doctorHead);
+            holder.appointCount = view.findViewById(R.id.appointCount);
 //            holder.appointCount = view.findViewById(R.id.appointCount);
             holder.doctorForteAndIntroduction = view.findViewById(R.id.doctorForte);
             holder.doctorPosition = view.findViewById(R.id.doctorPosition);
@@ -53,10 +55,22 @@ public class DoctorAdapter extends ArrayAdapter<Doctor> {
             view = convertView;
             holder = (ViewHolder)convertView.getTag();
         }
-        holder.doctorName.setText(doctor.getName());
-        holder.doctorPosition.setText(doctor.getHonour());
+        holder.doctorName.setText(doctorSche.getDoctor().getName());
+        holder.doctorPosition.setText(doctorSche.getDoctor().getHonour());
         holder.doctorForteAndIntroduction.setText(
-                "医生特长："+doctor.getForte()+"。医生简介："+doctor.getIntroduction());
+                "医生特长："+doctorSche.getDoctor().getForte()+"。医生简介："+doctorSche.getDoctor().getIntroduction());
+        holder.appointCount.setText("余号："+doctorSche.getSchedule().getRemainder());
+        int w = doctorSche.getSchedule().getW();
+        String wh ;
+        if (w==0){
+            wh = "全天";
+        }else if(w==1){
+            wh = "上午";
+        }else{
+            wh = "下午";
+        }
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        holder.doctorWorkTime.setText("    "+format.format(doctorSche.getSchedule().getWorkTimeStart())+" "+wh);
         return convertView;
     }
 }

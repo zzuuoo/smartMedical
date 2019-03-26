@@ -20,54 +20,53 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.zuovx.Adapter.DoctorAdapter;
 import com.zuovx.Adapter.DoctorSchAdapter;
 import com.zuovx.Model.Doctor;
 import com.zuovx.Model.DoctorSche;
+import com.zuovx.Model.Schedule;
+import com.zuovx.Model.ScheduleT;
 import com.zuovx.R;
 import com.zuovx.Utils.ActivityCollector;
 import com.zuovx.Utils.GlobalVar;
 import com.zuovx.Utils.LoadingDialog;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ChooseDoctorActivity extends AppCompatActivity {
+public class ChooseScheduleActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
     private LoadingDialog loadingDialog;
     private List<Doctor> doctors;
-    private List<Doctor> searchDoctors;
+    private List<Schedule> schedules;
+    private List<DoctorSche> doctorSches;
+    private List<DoctorSche> searchDoctorSches;
     private ListView listView;
     private SearchView searchView;
     private Integer sectionId;
     private Boolean isSearch = false;
-    private DoctorAdapter doctorAdapter;
+//    private DoctorAdapter doctorAdapter;
     private DoctorSchAdapter doctorSchAdapter;
-    private List<DoctorSche> doctorSches;
-    private List<DoctorSche> searchDoctorSches;
     private TextView textView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose_doctor);
+        setContentView(R.layout.activity_choose_schedule);
         ActivityCollector.addActivity(this);
         Intent intent = getIntent();
         sectionId = intent.getIntExtra("sectionId",0);
         getDoctorBySectionId(sectionId);
         init();
 
-
     }
-
     public void init()
     {
-        searchView = (SearchView)findViewById(R.id.all_doctor_searchView);
+        searchView = (SearchView)findViewById(R.id.all_schedule_searchView);
 
-        textView = (TextView)findViewById(R.id.nothingDoctor);
+        textView = (TextView)findViewById(R.id.nothingSchedule);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -77,25 +76,25 @@ public class ChooseDoctorActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
 //                Toast.makeText(getApplicationContext(),newText, Toast.LENGTH_SHORT).show();
-                searchDoctors = new ArrayList<>();
-                for(int i=0;i<doctors.size();i++){
-                    if(doctors.get(i).getName().contains(newText)){
-                        searchDoctors.add(doctors.get(i));
+                searchDoctorSches = new ArrayList<>();
+                for(int i=0;i<doctorSches.size();i++){
+                    if(doctorSches.get(i).getDoctor().getName().contains(newText)){
+                        searchDoctorSches.add(doctorSches.get(i));
 //                        System.out.println("添加一个"+doctors.get(i).getName());
                     }
                 }
-                if(searchDoctors.size()>0&&newText.length()>0){
-                    doctorAdapter = new DoctorAdapter(getApplicationContext(),
-                            R.layout.doctor_item,searchDoctors);
-                    listView.setAdapter(doctorAdapter);
+                if(searchDoctorSches.size()>0&&newText.length()>0){
+                    doctorSchAdapter = new DoctorSchAdapter(getApplicationContext(),
+                            R.layout.doctor_item,searchDoctorSches);
+                    listView.setAdapter(doctorSchAdapter);
                     isSearch=true;
 
                 }
                 if(newText.length()==0)
                 {
-                    doctorAdapter = new DoctorAdapter(getApplicationContext(),
-                            R.layout.doctor_item,doctors);
-                    listView.setAdapter(doctorAdapter);
+                    doctorSchAdapter = new DoctorSchAdapter(getApplicationContext(),
+                            R.layout.doctor_item,doctorSches);
+                    listView.setAdapter(doctorSchAdapter);
                     isSearch=false;
                 }
                 return false;
@@ -105,17 +104,17 @@ public class ChooseDoctorActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 //                System.out.println("点击了医生");
-                Doctor doctor =null;
+                DoctorSche doctorSche =null;
                 if(isSearch)
                 {
-                    doctor = searchDoctors.get(i);
+                    doctorSche = searchDoctorSches.get(i);
                 }else{
-                    doctor = doctors.get(i);
+                    doctorSche = doctorSches.get(i);
                 }
 //                Intent intent = new Intent(BookActivity.this,ChooseDoctorActivity.class);
 //                intent.putExtra("sectionId",section.getSectionId());
 //                startActivity(intent);
-                AlertDialog.Builder dialog = new AlertDialog.Builder(ChooseDoctorActivity.this);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(ChooseScheduleActivity.this);
                 dialog.setTitle("确认预约吗？");
                 dialog.setMessage("预约须知：同一天你只能预约两次," +
                         "预约成功而不赴约的，超过两次则拉入黑名单，确认预约吗？。");
@@ -139,9 +138,9 @@ public class ChooseDoctorActivity extends AppCompatActivity {
         });
 
     }
-    public void getDoctorBySectionId(Integer sectionId)
+    public void getDoctorBySectionId(final Integer sectionId)
     {
-        listView = (ListView)findViewById(R.id.all_doctor_list);
+        listView = (ListView)findViewById(R.id.all_schedule_list);
         loadingDialog = new LoadingDialog(this,"数据读取中...");
         loadingDialog.show();
         requestQueue = Volley.newRequestQueue(this);
@@ -163,15 +162,8 @@ public class ChooseDoctorActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 loadingDialog.close();
-                doctorAdapter = new DoctorAdapter(getApplicationContext(),
-                        R.layout.doctor_item,doctors);
-                listView.setAdapter(doctorAdapter);
-                if(doctors==null||doctors.size()==0)
-                {
-                    textView.setVisibility(View.VISIBLE);
-                }else{
-                    textView.setVisibility(View.GONE);
-                }
+                getSchedule(sectionId);
+
 
             }
         }, new Response.ErrorListener() {//异常后的监听数据
@@ -179,7 +171,6 @@ public class ChooseDoctorActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError volleyError) {
 //                volley_result.setText("加载错误"+volleyError);
                 loadingDialog.close();
-                textView.setVisibility(View.VISIBLE);
             }
         });
         //将get请求添加到队列中
@@ -188,32 +179,55 @@ public class ChooseDoctorActivity extends AppCompatActivity {
 
     public void getSchedule(Integer sectionId)
     {
-        listView = (ListView)findViewById(R.id.all_doctor_list);
         loadingDialog = new LoadingDialog(this,"数据读取中...");
         loadingDialog.show();
-        requestQueue = Volley.newRequestQueue(this);
+//        requestQueue = Volley.newRequestQueue(this);
         //创建一个请求
 
-        StringRequest stringRequest =new StringRequest(GlobalVar.url +"user/getDoctorBySection?sectionId="+sectionId, new Response.Listener<String>() {
+        StringRequest stringRequest =new StringRequest(GlobalVar.url
+                +"schedule/getScheduleBySectionId?sectionId="+sectionId, new Response.Listener<String>() {
             //正确接收数据回调
             @Override
             public void onResponse(String s) {
                 try {
                     Gson gson = new Gson();
-                    doctors = gson.fromJson(s, new TypeToken<List<Doctor>>() {}.getType());
-//                    Log.d("doctorsBySectionId:",doctors.toString());
-                    for(Doctor d:doctors){
-                        System.out.println(d.getName()+d.getHonour());
+                    List<ScheduleT> scheduleTS = new ArrayList<>();
+                    scheduleTS = gson.fromJson(s, new TypeToken<List<ScheduleT>>() {}.getType());
+                    schedules = new ArrayList<>();
+                    for(ScheduleT t :scheduleTS){
+                        Schedule schedule = new Schedule();
+                        schedule.setDoctorId(t.getDoctorId());
+                        schedule.setIsCancle(t.getIsCancle());
+                        schedule.setRemainder(t.getRemainder());
+                        schedule.setScheduleId(t.getScheduleId());
+                        schedule.setWorkTimeStart(new Date(t.getWorkTimeStart()));
+                        schedule.setW(t.getW());
+                        schedules.add(schedule);
                     }
+
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                if (schedules!=null&&schedules.size()>0){
+                    doctorSches = new ArrayList<>();
+                    for(Schedule sc :schedules){
+                        for(Doctor d : doctors){
+                            if(sc.getDoctorId()==d.getDoctorId()){
+                                DoctorSche doctorSche = new DoctorSche();
+                                doctorSche.setDoctor(d);
+                                doctorSche.setSchedule(sc);
+                                doctorSches.add(doctorSche);
+                                break;
+                            }
+                        }
+                    }
+                    doctorSchAdapter = new DoctorSchAdapter(getApplicationContext(),
+                            R.layout.doctor_item,doctorSches);
+                    listView.setAdapter(doctorSchAdapter);
+                }
                 loadingDialog.close();
-                doctorAdapter = new DoctorAdapter(getApplicationContext(),
-                        R.layout.doctor_item,doctors);
-                listView.setAdapter(doctorAdapter);
-                if(doctors==null||doctors.size()==0)
+                if(doctorSches==null||doctorSches.size()==0)
                 {
                     textView.setVisibility(View.VISIBLE);
                 }else{

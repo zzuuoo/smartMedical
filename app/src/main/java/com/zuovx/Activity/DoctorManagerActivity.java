@@ -148,7 +148,7 @@ public class DoctorManagerActivity extends AppCompatActivity implements View.OnC
                 }
                 Intent intent = new Intent(DoctorManagerActivity.this,ScheduleManagerActivity.class);
                 intent.putExtra("doctor",d);
-                startActivity(intent);
+                startActivityForResult(intent,0);
                 Toast.makeText(getApplicationContext(),d.getName(),Toast.LENGTH_SHORT).show();
             }
         });
@@ -291,32 +291,14 @@ public class DoctorManagerActivity extends AppCompatActivity implements View.OnC
     {
         switch (requestCode)
         {
-            case 1://add
-                if(resultCode==1)
-                {
-                    Toast.makeText(getApplication(),"插入成功",Toast.LENGTH_SHORT).show();
-                    setData();
-//                    employeeAdapter = new EmployeeAdapter(this,R.layout.employee_item,userList);
-//                    ls.setAdapter(employeeAdapter);
+            case -1:
 
-                }else if (resultCode==0){
-                    Toast.makeText(getApplication(),"添加失败",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getApplication(),"取消",Toast.LENGTH_SHORT).show();
-                }
+                Toast.makeText(getApplication(),"添加失败",Toast.LENGTH_SHORT).show();
+
                 break;
-            case 2://edit
-                if(resultCode==1)
-                {
-                    Toast.makeText(getApplication(),"修改成功",Toast.LENGTH_SHORT).show();
-                    setData();
-//                    employeeAdapter = new EmployeeAdapter(this,R.layout.employee_item,userList);
-//                    ls.setAdapter(employeeAdapter);
-                }else if (resultCode==0){
-                    Toast.makeText(getApplication(),"修改失败",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getApplication(),"取消",Toast.LENGTH_SHORT).show();
-                }
+            case 1:
+                Toast.makeText(getApplication(),"添加成功",Toast.LENGTH_SHORT).show();;
+
                 break;
             default:
                 break;

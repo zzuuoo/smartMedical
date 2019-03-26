@@ -98,7 +98,7 @@ public class BookActivity extends AppCompatActivity {
                 }else{
                     section = sections.get(i);
                 }
-                Intent intent = new Intent(BookActivity.this,ChooseDoctorActivity.class);
+                Intent intent = new Intent(BookActivity.this,ChooseScheduleActivity.class);
                 intent.putExtra("sectionId",section.getSectionId());
                 startActivity(intent);
 //                Toast.makeText(getApplicationContext(),section.getSectionName(),Toast.LENGTH_SHORT).show();
