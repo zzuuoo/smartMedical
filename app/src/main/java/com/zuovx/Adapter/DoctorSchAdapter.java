@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.zuovx.Model.DoctorSche;
 import com.zuovx.R;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class DoctorSchAdapter extends ArrayAdapter<DoctorSche> {
@@ -62,15 +61,14 @@ public class DoctorSchAdapter extends ArrayAdapter<DoctorSche> {
         holder.appointCount.setText("余号："+doctorSche.getSchedule().getRemainder());
         int w = doctorSche.getSchedule().getW();
         String wh ;
-        if (w==0){
-            wh = "全天";
-        }else if(w==1){
+        if(w==1){
             wh = "上午";
         }else{
             wh = "下午";
         }
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        holder.doctorWorkTime.setText("    "+format.format(doctorSche.getSchedule().getWorkTimeStart())+" "+wh);
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//        holder.doctorWorkTime.setText("    "+format.format(doctorSche.getSchedule().getWorkTimeStart())+" "+wh);
+        holder.doctorWorkTime.setText("    "+doctorSche.getSchedule().getWorkTimeStart()+"    "+wh);
         return convertView;
     }
 }

@@ -24,14 +24,16 @@ import com.zuovx.Adapter.DoctorSchAdapter;
 import com.zuovx.Model.Doctor;
 import com.zuovx.Model.DoctorSche;
 import com.zuovx.Model.Schedule;
-import com.zuovx.Model.ScheduleT;
 import com.zuovx.R;
 import com.zuovx.Utils.ActivityCollector;
 import com.zuovx.Utils.GlobalVar;
 import com.zuovx.Utils.LoadingDialog;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,7 +80,10 @@ public class ChooseScheduleActivity extends AppCompatActivity {
 //                Toast.makeText(getApplicationContext(),newText, Toast.LENGTH_SHORT).show();
                 searchDoctorSches = new ArrayList<>();
                 for(int i=0;i<doctorSches.size();i++){
-                    if(doctorSches.get(i).getDoctor().getName().contains(newText)){
+                    if(doctorSches.get(i).getDoctor().getName().contains(newText)
+                            ||doctorSches.get(i).getSchedule()
+                            .getWorkTimeStart().contains(newText)
+                            ||doctorSches.get(i).getDoctor().getHonour().contains(newText)){
                         searchDoctorSches.add(doctorSches.get(i));
 //                        System.out.println("添加一个"+doctors.get(i).getName());
                     }
@@ -191,19 +196,20 @@ public class ChooseScheduleActivity extends AppCompatActivity {
             public void onResponse(String s) {
                 try {
                     Gson gson = new Gson();
-                    List<ScheduleT> scheduleTS = new ArrayList<>();
-                    scheduleTS = gson.fromJson(s, new TypeToken<List<ScheduleT>>() {}.getType());
-                    schedules = new ArrayList<>();
-                    for(ScheduleT t :scheduleTS){
-                        Schedule schedule = new Schedule();
-                        schedule.setDoctorId(t.getDoctorId());
-                        schedule.setIsCancle(t.getIsCancle());
-                        schedule.setRemainder(t.getRemainder());
-                        schedule.setScheduleId(t.getScheduleId());
-                        schedule.setWorkTimeStart(new Date(t.getWorkTimeStart()));
-                        schedule.setW(t.getW());
-                        schedules.add(schedule);
-                    }
+                    schedules = gson.fromJson(s, new TypeToken<List<Schedule>>() {}.getType());
+//                    List<ScheduleT> scheduleTS = new ArrayList<>();
+//                    scheduleTS = gson.fromJson(s, new TypeToken<List<ScheduleT>>() {}.getType());
+//                    schedules = new ArrayList<>();
+//                    for(ScheduleT t :scheduleTS){
+//                        Schedule schedule = new Schedule();
+//                        schedule.setDoctorId(t.getDoctorId());
+//                        schedule.setIsCancle(t.getIsCancle());
+//                        schedule.setRemainder(t.getRemainder());
+//                        schedule.setScheduleId(t.getScheduleId());
+//                        schedule.setWorkTimeStart(new Date(t.getWorkTimeStart()));
+//                        schedule.setW(t.getW());
+//                        schedules.add(schedule);
+//                    }
 
 
                 } catch (Exception e) {
@@ -222,6 +228,7 @@ public class ChooseScheduleActivity extends AppCompatActivity {
                             }
                         }
                     }
+                    sortScheDoctor(doctorSches);
                     doctorSchAdapter = new DoctorSchAdapter(getApplicationContext(),
                             R.layout.doctor_item,doctorSches);
                     listView.setAdapter(doctorSchAdapter);
@@ -245,6 +252,37 @@ public class ChooseScheduleActivity extends AppCompatActivity {
         });
         //将get请求添加到队列中
         requestQueue.add(stringRequest);
+    }
+
+    public void sortScheDoctor(List<DoctorSche> ds){
+        Collections.sort(ds, new Comparator<DoctorSche>() {
+            @Override
+            public int compare(DoctorSche o1, DoctorSche o2) {
+                // TODO Auto-generated method stub
+                Schedule s1,s2;
+                s1 = o1.getSchedule();
+                s2 = o2.getSchedule();
+                long p1,p2;
+                p1 = 0;
+                p2 = 0;
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    p1 = format.parse(s1.getWorkTimeStart()).getTime();
+                    p2 = format.parse(s2.getWorkTimeStart()).getTime();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                p1 = p1 +s1.getW();
+                p2 = p2 +s2.getW();
+                if(p1>p2){
+                    return 1;
+                }else if(p1<p2){
+                    return -1;
+                }
+                return 0;
+
+            }
+        });
     }
     @Override
     public void onDestroy() {
