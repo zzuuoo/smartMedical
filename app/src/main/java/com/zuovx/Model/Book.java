@@ -1,7 +1,5 @@
 package com.zuovx.Model;
 
-import java.util.Date;
-
 /**
  * 预约
  */
@@ -9,7 +7,7 @@ public class Book {
     private int bookId;
     private int doctorId;
     private int patientId;
-    private Date bookTime;//预约时间
+    private String bookTime;//预约时间
     private boolean isAvaliablity;//是否生效
     private boolean isCancle;//是否取消
 
@@ -53,11 +51,11 @@ public class Book {
         this.patientId = patientId;
     }
 
-    public Date getBookTime() {
+    public String getBookTime() {
         return bookTime;
     }
 
-    public void setBookTime(Date bookTime) {
+    public void setBookTime(String bookTime) {
         this.bookTime = bookTime;
     }
 }
