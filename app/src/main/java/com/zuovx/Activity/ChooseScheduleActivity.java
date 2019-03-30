@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -49,6 +50,7 @@ public class ChooseScheduleActivity extends AppCompatActivity {
     private ListView listView;
     private SearchView searchView;
     private Integer sectionId;
+    private Toolbar toolbar;
     private Boolean isSearch = false;
 //    private DoctorAdapter doctorAdapter;
     private DoctorSchAdapter doctorSchAdapter;
@@ -66,6 +68,17 @@ public class ChooseScheduleActivity extends AppCompatActivity {
     }
     public void init()
     {
+        //返回键
+        toolbar = findViewById(R.id.choose_schedule_toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         searchView = (SearchView)findViewById(R.id.all_schedule_searchView);
 
         textView = (TextView)findViewById(R.id.nothingSchedule);

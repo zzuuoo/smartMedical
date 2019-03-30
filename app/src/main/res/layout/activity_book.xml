@@ -2,9 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/book_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay" >
+        <TextView
+            android:id="@+id/book_title_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:text="选择科室" />
 
+        <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/doctor_add_user"-->
+        <!--android:textSize="15dp"-->
+        <!--android:background="@drawable/button_selector"-->
+        <!--android:layout_gravity="right"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:clickable="true"-->
+        <!--android:text="添加"/>-->
+    </android.support.v7.widget.Toolbar>
 
     <SearchView
         android:layout_width="match_parent"

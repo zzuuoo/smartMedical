@@ -3,6 +3,7 @@ package com.zuovx.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -41,6 +42,7 @@ public class BookActivity extends AppCompatActivity {
     private Boolean isSearch = false;
     private SectionAdapter sectionAdapter;
     private TextView textView;
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +54,19 @@ public class BookActivity extends AppCompatActivity {
     }
     public void init()
     {
+
+        //返回键
+        toolbar = findViewById(R.id.book_toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         searchView = (SearchView)findViewById(R.id.bookSearchView);
 
         textView = (TextView)findViewById(R.id.nothingBook);
