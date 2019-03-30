@@ -278,8 +278,9 @@ public class DoctorManagerActivity extends AppCompatActivity implements View.OnC
         switch (view.getId())
         {
             case R.id.doctor_add_user:
-//                Intent i = new Intent(UserManageActivity.this,AddUserActivity.class);
-//                startActivityForResult(i,1);
+                Intent i = new Intent(DoctorManagerActivity.this,
+                        AddDoctorActivity.class);
+                startActivityForResult(i,1);
                 break;
             default:
                 break;
@@ -289,19 +290,24 @@ public class DoctorManagerActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onActivityResult(int requestCode,int resultCode,Intent data)
     {
-        switch (requestCode)
-        {
-            case -1:
+        if(requestCode==0){
+            switch (resultCode)
+            {
+                case -1:
 
-                Toast.makeText(getApplication(),"添加失败",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplication(),"添加值班失败",Toast.LENGTH_SHORT).show();
 
-                break;
-            case 1:
-                Toast.makeText(getApplication(),"添加成功",Toast.LENGTH_SHORT).show();;
+                    break;
+                case 1:
+                    Toast.makeText(getApplication(),"添加值班成功",Toast.LENGTH_SHORT).show();;
 
-                break;
-            default:
-                break;
+                    break;
+                default:
+                    break;
+            }
+        }else if(requestCode==1){
+
         }
+
     }
 }
