@@ -201,14 +201,14 @@
             android:text="确定"
             android:textColor="@color/green"
             android:textSize="24dp"
-            android:id="@+id/sure_addUser"
+            android:id="@+id/sure_addDoctor"
             android:background="@drawable/button_selector"
             android:layout_marginRight="10dp"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:text="取消"
-            android:id="@+id/cancel_addUser"
+            android:id="@+id/cancel_addDoctor"
             android:layout_marginLeft="10dp"
             android:textColor="@color/red"
             android:textSize="24dp"
