@@ -306,7 +306,16 @@ public class DoctorManagerActivity extends AppCompatActivity implements View.OnC
                     break;
             }
         }else if(requestCode==1){
+            switch (resultCode){
+                case 1:
+                    Toast.makeText(getApplication(),"添加医生成功",Toast.LENGTH_SHORT).show();;
+                    setData();
+                    break;
+                case 0:
+                    Toast.makeText(getApplication(),"添加医生失败",Toast.LENGTH_SHORT).show();;
 
+                    break;
+            }
         }
 
     }
