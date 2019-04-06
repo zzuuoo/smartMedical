@@ -51,7 +51,8 @@
         <activity android:name=".Activity.ScheduleManagerActivity" />
         <activity android:name=".Activity.TestTimePickerActivity" />
         <activity android:name=".Activity.ChooseScheduleActivity" />
-        <activity android:name=".Activity.AddDoctorActivity"></activity>
+        <activity android:name=".Activity.AddDoctorActivity" />
+        <activity android:name=".Activity.AddScheduleActivity"></activity>
     </application>
 
 </manifest>

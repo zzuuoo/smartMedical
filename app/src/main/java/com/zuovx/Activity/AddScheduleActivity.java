@@ -38,7 +38,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ScheduleManagerActivity extends AppCompatActivity implements View.OnClickListener {
+public class AddScheduleActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView mTvSelectedDate;
     private TextView scheduleRemainder;
@@ -46,12 +46,12 @@ public class ScheduleManagerActivity extends AppCompatActivity implements View.O
     private ArrayAdapter<Section> arrayAdapterSection;
     private ArrayAdapter<Doctor> arrayAdapterDoctor;
     private RequestQueue requestQueue;
-//    private LoadingDialog loadingDialog;
+    //    private LoadingDialog loadingDialog;
     private List<Section> sections;
     private List<Doctor> doctors;
-//    private Spinner spinnerSection;
+    //    private Spinner spinnerSection;
     private Spinner spinnerTime,spinnerSection,spinnerDoctor;
-//    private Doctor doctor;
+    //    private Doctor doctor;
     private Button cancle,sure;
     private Toolbar toolbar;
     Handler handler;
@@ -59,7 +59,7 @@ public class ScheduleManagerActivity extends AppCompatActivity implements View.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_schedule_manager);
+        setContentView(R.layout.activity_add_schedule);
         init();
 //        Intent intent = this.getIntent();
 //        doctor = (Doctor) intent.getSerializableExtra("doctor");
@@ -70,13 +70,13 @@ public class ScheduleManagerActivity extends AppCompatActivity implements View.O
                 switch (msg.what)
                 {
                     case 1:
-                        ScheduleManagerActivity.this.setResult(1);
+                        AddScheduleActivity.this.setResult(1);
                         dialog.close();
 //                        Toast.makeText(EditScheduleActivity.this,"生成票成功",Toast.LENGTH_SHORT).show();
                         finish();
                         break;
                     case 2:
-                        ScheduleManagerActivity.this.setResult(0);
+                        AddScheduleActivity.this.setResult(0);
                         dialog.close();
                         finish();
                     case 3:
@@ -113,11 +113,11 @@ public class ScheduleManagerActivity extends AppCompatActivity implements View.O
         spinnerSection = findViewById(R.id.add_schedule_section);
         spinnerDoctor = findViewById(R.id.add_schedule_doctor);
         String[] time ={"全天","上午","下午"};
-        spinnerTime.setAdapter(new ArrayAdapter<String>(ScheduleManagerActivity.this,android.R.layout.simple_spinner_item,time));
+        spinnerTime.setAdapter(new ArrayAdapter<String>(AddScheduleActivity.this,android.R.layout.simple_spinner_item,time));
         spinnerSection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                Toast.makeText(ScheduleManagerActivity.this,i,Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AddScheduleActivity.this,i,Toast.LENGTH_SHORT).show();
                 System.out.println(i);
                 getDoctor(sections.get(i));
             }
@@ -151,7 +151,7 @@ public class ScheduleManagerActivity extends AppCompatActivity implements View.O
                     e.printStackTrace();
                 }
 
-                arrayAdapterSection = new ArrayAdapter<Section>(ScheduleManagerActivity.this,android.R.layout.simple_spinner_item,sections);
+                arrayAdapterSection = new ArrayAdapter<Section>(AddScheduleActivity.this,android.R.layout.simple_spinner_item,sections);
                 spinnerSection.setAdapter(arrayAdapterSection);
                 SpinnerAdapter spinnerPAdapter = spinnerSection.getAdapter();
                 int k = spinnerPAdapter.getCount();
@@ -186,10 +186,10 @@ public class ScheduleManagerActivity extends AppCompatActivity implements View.O
 
                 doctors = new Gson().fromJson(s, new TypeToken<List<Doctor>>() {}.getType());
 //                if(doctors!=null&&doctors.size()>0){
-//                    arrayAdapterDoctor = new ArrayAdapter<>(ScheduleManagerActivity.this,android.R.layout.simple_spinner_item,doctors);
+//                    arrayAdapterDoctor = new ArrayAdapter<>(AddScheduleActivity.this,android.R.layout.simple_spinner_item,doctors);
 //                    spinnerDoctor.setAdapter(arrayAdapterDoctor);
 //                }
-                arrayAdapterDoctor = new ArrayAdapter<>(ScheduleManagerActivity.this,android.R.layout.simple_spinner_item,doctors);
+                arrayAdapterDoctor = new ArrayAdapter<>(AddScheduleActivity.this,android.R.layout.simple_spinner_item,doctors);
                 spinnerDoctor.setAdapter(arrayAdapterDoctor);
 
 
@@ -277,7 +277,7 @@ public class ScheduleManagerActivity extends AppCompatActivity implements View.O
         }else{
             w = "2";
         }
-        dialog = new LoadingDialog(ScheduleManagerActivity.this,"加载中,,,");
+        dialog = new LoadingDialog(AddScheduleActivity.this,"加载中,,,");
         dialog.show();
         requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(

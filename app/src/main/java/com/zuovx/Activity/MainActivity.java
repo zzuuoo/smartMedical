@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.zuovx.Adapter.VPadapter;
 import com.zuovx.AdminFragment.AdminMainFragment;
 import com.zuovx.AdminFragment.AdminPersionalFragment;
+import com.zuovx.AdminFragment.AdminScheduleFragment;
 import com.zuovx.DoctorFragment.DoctorMainFragment;
 import com.zuovx.DoctorFragment.DoctorPersionalFragment;
 import com.zuovx.DoctorFragment.DoctorRecordFragment;
@@ -57,9 +58,11 @@ public class MainActivity extends AppCompatActivity
                 piclist.add(R.mipmap.personal);
 
             } else if (user.getStatus() == 0) {
-                title.add("管理");
+                title.add("值班管理");
+                title.add("医生管理");
                 title.add("个人信息");
                 piclist.add(R.mipmap.tab_movie_a);
+                piclist.add(R.mipmap.cinema);
                 piclist.add(R.mipmap.personal);
             } else {
                 title.add("处理预约");
@@ -136,6 +139,7 @@ public class MainActivity extends AppCompatActivity
             fragmentArrayList.add(new PatientRecordFragment());
             fragmentArrayList.add(new PersonalFragment());
         } else if (user.getStatus() == 0) {
+            fragmentArrayList.add(new AdminScheduleFragment());
             fragmentArrayList.add(new AdminMainFragment());
             fragmentArrayList.add(new AdminPersionalFragment());
         } else {

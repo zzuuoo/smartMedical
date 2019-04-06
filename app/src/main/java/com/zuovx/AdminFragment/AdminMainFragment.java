@@ -1,6 +1,5 @@
 package com.zuovx.AdminFragment;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -49,7 +47,7 @@ public class AdminMainFragment extends Fragment implements View.OnClickListener 
     private Boolean isSearch = false;
     private SectionAdapter sectionAdapter;
     private TextView textView;
-    private Button addSection;
+//    private Button addSection;
 
     public AdminMainFragment() {
         // Required empty public constructor
@@ -64,8 +62,8 @@ public class AdminMainFragment extends Fragment implements View.OnClickListener 
 
     public void init(View view){
 
-        addSection = (Button)view.findViewById(R.id.admin_add_section);
-        addSection.setOnClickListener(this);
+//        addSection = (Button)view.findViewById(R.id.admin_add_section);
+//        addSection.setOnClickListener(this);
         searchView = (SearchView)view.findViewById(R.id.adminSectionSearchView);
 
         textView = (TextView)view.findViewById(R.id.nothingAdminSection);
@@ -135,14 +133,14 @@ public class AdminMainFragment extends Fragment implements View.OnClickListener 
     public void onClick(View view) {
         switch (view.getId())
         {
-            case R.id.admin_add_section:
-                //我的挂号
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                dialog.setTitle("添加section");
-                dialog.setMessage("待完成");
-                dialog.setCancelable(true);
-                dialog.show();
-                break;
+//            case R.id.admin_add_section:
+//                //我的挂号
+//                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+//                dialog.setTitle("添加section");
+//                dialog.setMessage("待完成");
+//                dialog.setCancelable(true);
+//                dialog.show();
+//                break;
 
             default:
                 break;
