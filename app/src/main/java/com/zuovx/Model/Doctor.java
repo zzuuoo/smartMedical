@@ -17,6 +17,10 @@ public class Doctor implements Serializable {
     private String introduction;//医生简介
     private String forte;//特长
 
+    public String toString(){
+        return name;
+    }
+
     public String getHonour() {
         return honour;
     }

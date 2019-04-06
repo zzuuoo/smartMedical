@@ -6,35 +6,35 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/user_toolbar"
+        android:id="@+id/admin_scedule_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/AppTheme.PopupOverlay" >
         <TextView
-            android:id="@+id/admin_title_name"
+            android:id="@+id/admin_title_sche"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="20dp"
-            android:text="医生科室管理" />
+            android:text="医生值班管理" />
 
-        <!--<Button-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/admin_add_section"-->
-            <!--android:textSize="15dp"-->
-            <!--android:background="@drawable/button_selector"-->
-            <!--android:layout_gravity="right"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:clickable="true"-->
-            <!--android:text="添加科室"/>-->
+        <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/admin_add_schedule"
+        android:textSize="15dp"
+        android:background="@drawable/button_selector"
+        android:layout_gravity="right"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:text="值班安排"/>
     </android.support.v7.widget.Toolbar>
 
     <SearchView
         android:layout_width="match_parent"
-        android:id="@+id/adminSectionSearchView"
-        android:queryHint="请输入科室的名称"
+        android:id="@+id/adminScheduleSearchView"
+        android:queryHint="请输入日期或医生"
         android:layout_height="wrap_content"></SearchView>
     <TextView
         android:layout_width="wrap_content"
@@ -42,14 +42,14 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
         android:textSize="30dp"
-        android:id="@+id/nothingAdminSection"
+        android:id="@+id/nothingAdminSchedule"
         android:visibility="gone"
         android:text="空空如也"/>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/admin_section_list"
+        android:id="@+id/admin_schedule_list"
         android:layout_gravity="center"
         />
 
