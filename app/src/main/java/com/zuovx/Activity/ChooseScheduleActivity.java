@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -55,6 +57,8 @@ public class ChooseScheduleActivity extends AppCompatActivity {
 //    private DoctorAdapter doctorAdapter;
     private DoctorSchAdapter doctorSchAdapter;
     private TextView textView;
+
+    private Handler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +68,27 @@ public class ChooseScheduleActivity extends AppCompatActivity {
         sectionId = intent.getIntExtra("sectionId",0);
         getDoctorBySectionId(sectionId);
         init();
+        handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                switch (msg.what)
+                {
+                    case 1:
+                        loadingDialog.close();
+                        Toast.makeText(ChooseScheduleActivity.this,"预约成功",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(ChooseScheduleActivity.this,MyBookActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case 2:
+                        loadingDialog.close();
+                        Toast.makeText(ChooseScheduleActivity.this,"预约失败",Toast.LENGTH_SHORT).show();
+                        break;
+                    case 3:
+                        break;
+                }
+            }
+        };
 
     }
     public void init()
@@ -129,28 +154,33 @@ public class ChooseScheduleActivity extends AppCompatActivity {
                 }else{
                     doctorSche = doctorSches.get(i);
                 }
+                final String did = doctorSche.getSchedule().getScheduleId()+"";
 //                Intent intent = new Intent(BookActivity.this,ChooseDoctorActivity.class);
 //                intent.putExtra("sectionId",section.getSectionId());
 //                startActivity(intent);
-                AlertDialog.Builder dialog = new AlertDialog.Builder(ChooseScheduleActivity.this);
-                dialog.setTitle("确认预约吗？");
-                dialog.setMessage("预约须知：同一天你只能预约两次," +
-                        "预约成功而不赴约的，超过两次则拉入黑名单，确认预约吗？。");
-                dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                if(doctorSche.getSchedule().getRemainder()>1) {
 
-                        Toast.makeText(getApplicationContext(),"预约成功",Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(ChooseScheduleActivity.this);
+                    dialog.setTitle("确认预约吗？");
+                    dialog.setMessage("预约须知：同一天你只能预约两次," +
+                            "预约成功而不赴约的，超过两次则拉入黑名单，确认预约吗？。");
+                    dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
 
-                    }
-                });
-                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(getApplicationContext(), "取消", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                dialog.show();
+                            bookWithVolley(MainActivity.user.getAccount(), did);
+                        }
+                    });
+                    dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Toast.makeText(getApplicationContext(), "取消", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    dialog.show();
+                }else{
+                    Toast.makeText(getApplicationContext(), "已被预约满", Toast.LENGTH_SHORT).show();
+                }
 //                Toast.makeText(getApplicationContext(),doctor.getName(),Toast.LENGTH_SHORT).show();
             }
         });
@@ -210,20 +240,6 @@ public class ChooseScheduleActivity extends AppCompatActivity {
                 try {
                     Gson gson = new Gson();
                     schedules = gson.fromJson(s, new TypeToken<List<Schedule>>() {}.getType());
-//                    List<ScheduleT> scheduleTS = new ArrayList<>();
-//                    scheduleTS = gson.fromJson(s, new TypeToken<List<ScheduleT>>() {}.getType());
-//                    schedules = new ArrayList<>();
-//                    for(ScheduleT t :scheduleTS){
-//                        Schedule schedule = new Schedule();
-//                        schedule.setDoctorId(t.getDoctorId());
-//                        schedule.setIsCancle(t.getIsCancle());
-//                        schedule.setRemainder(t.getRemainder());
-//                        schedule.setScheduleId(t.getScheduleId());
-//                        schedule.setWorkTimeStart(new Date(t.getWorkTimeStart()));
-//                        schedule.setW(t.getW());
-//                        schedules.add(schedule);
-//                    }
-
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -306,27 +322,29 @@ public class ChooseScheduleActivity extends AppCompatActivity {
     /**
      * 使用volley框架进行登录请求，并返回用户基本信息存于MainActivity的user中
      * @param account
-     * @param password
-     * @param status
      */
-    private void bookWithVolley(final String account, final String password, final String status)
+    private void bookWithVolley(final String account, final String scheduleId)
     {
+        loadingDialog = new LoadingDialog(this,"预约中...");
+        loadingDialog.show();
         requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(
                 com.android.volley.Request.Method.POST,
-                GlobalVar.url + "login",
+                GlobalVar.url + "book/createBook",
                 new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
-                        if(s==null||s.equals(""))
+                        if(s!=null&&s.equals("1"))
                         {
-
+                        Message message = new Message();
+                        message.what = 1;
+                        handler.sendMessage(message);
                         }else{
-
+                            Message message = new Message();
+                            message.what = 2;
+                            handler.sendMessage(message);
                         }
-//                        Message message = new Message();
-//                        message.what = 2;
-//                        handler.sendMessage(message);
+
 
 
                     }
@@ -334,17 +352,16 @@ public class ChooseScheduleActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
 
-//                Message message1 = new Message();
-//                message1.what = 3;
-//                handler.sendMessage(message1);
+                Message message = new Message();
+                message.what = 2;
+                handler.sendMessage(message);
             }
         }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("account", account);
-                map.put("password", password);
-                map.put("userStatus",status);
+                map.put("scheduleId", scheduleId);
                 return map;
             }
 

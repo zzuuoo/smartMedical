@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.zuovx.Activity.BookActivity;
+import com.zuovx.Activity.MyBookActivity;
 import com.zuovx.R;
 
 /**
@@ -57,11 +58,13 @@ public class VisitFragment extends Fragment implements View.OnClickListener {
         {
             case R.id.myregistration:
                 //我的挂号
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                dialog.setTitle("我的挂号");
-                dialog.setMessage("待完成");
-                dialog.setCancelable(true);
-                dialog.show();
+//                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+//                dialog.setTitle("我的挂号");
+//                dialog.setMessage("待完成");
+//                dialog.setCancelable(true);
+//                dialog.show();
+                Intent intentm = new Intent(getActivity(),MyBookActivity.class);
+                startActivity(intentm);
                 break;
             case R.id.guide:
                 //预约指引

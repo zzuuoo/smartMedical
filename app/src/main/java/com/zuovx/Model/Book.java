@@ -5,7 +5,7 @@ package com.zuovx.Model;
  */
 public class Book {
     private int bookId;
-    private int doctorId;
+    private int scheduleId;
     private int patientId;
     private String bookTime;//预约时间
     private boolean isAvaliablity;//是否生效
@@ -35,14 +35,6 @@ public class Book {
         this.bookId = bookId;
     }
 
-    public int getDoctorId() {
-        return doctorId;
-    }
-
-    public void setDoctorId(int doctorId) {
-        this.doctorId = doctorId;
-    }
-
     public int getPatientId() {
         return patientId;
     }
@@ -53,6 +45,14 @@ public class Book {
 
     public String getBookTime() {
         return bookTime;
+    }
+
+    public int getScheduleId() {
+        return scheduleId;
+    }
+
+    public void setScheduleId(int scheduleId) {
+        this.scheduleId = scheduleId;
     }
 
     public void setBookTime(String bookTime) {

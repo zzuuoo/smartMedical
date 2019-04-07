@@ -108,6 +108,7 @@ public class LoginActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ActivityCollector.addActivity(this);
         // Set up the login form.
         init();
 //        ActivityCollector.addActivity(this);
@@ -726,8 +727,8 @@ public class LoginActivity extends AppCompatActivity
     }
 
     @Override
-    public void finish() {
-        super.finish();
+    protected void onDestroy() {
+        super.onDestroy();
         ActivityCollector.removeActivity(this);
     }
 }

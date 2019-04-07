@@ -85,7 +85,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ActivityCollector.quitAll();
+        ActivityCollector.removeActivity(this);
+//        ActivityCollector.quitAll();
     }
 
     @Override

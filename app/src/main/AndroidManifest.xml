@@ -29,30 +29,38 @@
         </activity>
         <activity
             android:name=".Activity.MainActivity"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.RegisterActivity"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.BookActivity"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleTask" />
         <activity
             android:name=".Activity.ChooseDoctorActivity"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleTask" />
         <activity
             android:name=".Activity.DoctorActivity"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleTask" />
         <activity
             android:name=".Activity.AdminActivity"
-            android:launchMode="singleInstance" />
-        <activity android:name=".Activity.DoctorManagerActivity" />
-        <activity android:name=".Activity.ScheduleManagerActivity" />
-        <activity android:name=".Activity.TestTimePickerActivity" />
-        <activity android:name=".Activity.ChooseScheduleActivity" />
-        <activity android:name=".Activity.AddDoctorActivity" />
-        <activity android:name=".Activity.AddScheduleActivity"></activity>
+            android:launchMode="singleTask" />
+        <activity android:name=".Activity.DoctorManagerActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".Activity.ScheduleManagerActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".Activity.TestTimePickerActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".Activity.ChooseScheduleActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".Activity.AddDoctorActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".Activity.AddScheduleActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".Activity.MyBookActivity"
+            android:launchMode="singleTask"></activity>
     </application>
 
 </manifest>
