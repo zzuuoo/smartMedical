@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zuovx.Model.Section;
 import com.zuovx.R;
+import com.zuovx.Utils.ActivityCollector;
 import com.zuovx.Utils.GlobalVar;
 import com.zuovx.Utils.LoadingDialog;
 
@@ -58,6 +59,7 @@ public class AddDoctorActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_doctor);
         init();
+        ActivityCollector.addActivity(this);
         handler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
@@ -118,7 +120,11 @@ public class AddDoctorActivity extends AppCompatActivity implements View.OnClick
 
 
     }
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
+    }
     public void getSection(){
         //创建一个请求队列
 

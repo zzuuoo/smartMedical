@@ -155,6 +155,7 @@ public class RegisterActivity extends AppCompatActivity
     protected void onDestroy() {
         super.onDestroy();
         SMSSDK.unregisterEventHandler(eventHandler);
+        ActivityCollector.removeActivity(this);
     }
 
 }

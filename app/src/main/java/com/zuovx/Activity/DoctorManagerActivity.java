@@ -26,6 +26,7 @@ import com.google.gson.reflect.TypeToken;
 import com.zuovx.Adapter.DoctorManagerAdapter;
 import com.zuovx.Model.Doctor;
 import com.zuovx.R;
+import com.zuovx.Utils.ActivityCollector;
 import com.zuovx.Utils.GlobalVar;
 import com.zuovx.Utils.LoadingDialog;
 
@@ -53,6 +54,7 @@ public class DoctorManagerActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_manager);
+        ActivityCollector.addActivity(this);
         Intent intent = getIntent();
         sectionId = intent.getIntExtra("sectionId",-1);
         setData();
@@ -271,6 +273,7 @@ public class DoctorManagerActivity extends AppCompatActivity implements View.OnC
     {
         super.onDestroy();
         setResult(1);
+        ActivityCollector.removeActivity(this);
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.zuovx.R;
+import com.zuovx.Utils.ActivityCollector;
 import com.zuovx.datePicker.CustomDatePicker;
 import com.zuovx.datePicker.DateFormatUtils;
 
@@ -19,6 +20,7 @@ public class TestTimePickerActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_time_picker);
+        ActivityCollector.addActivity(this);
 
         findViewById(R.id.ll_date).setOnClickListener(this);
         mTvSelectedDate = findViewById(R.id.tv_selected_date);
@@ -48,6 +50,7 @@ public class TestTimePickerActivity extends AppCompatActivity implements View.On
     protected void onDestroy() {
         super.onDestroy();
         mDatePicker.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 
     private void initDatePicker() {

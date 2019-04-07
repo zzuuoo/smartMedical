@@ -26,6 +26,7 @@ import com.google.gson.reflect.TypeToken;
 import com.zuovx.Model.Doctor;
 import com.zuovx.Model.Section;
 import com.zuovx.R;
+import com.zuovx.Utils.ActivityCollector;
 import com.zuovx.Utils.GlobalVar;
 import com.zuovx.Utils.LoadingDialog;
 import com.zuovx.datePicker.CustomDatePicker;
@@ -60,6 +61,7 @@ public class ScheduleManagerActivity extends AppCompatActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule_manager);
+        ActivityCollector.addActivity(this);
         init();
 //        Intent intent = this.getIntent();
 //        doctor = (Doctor) intent.getSerializableExtra("doctor");
@@ -232,6 +234,7 @@ public class ScheduleManagerActivity extends AppCompatActivity implements View.O
     protected void onDestroy() {
         super.onDestroy();
         mDatePicker.onDestroy();
+        ActivityCollector.removeActivity(this);
     }
 
     @Override
@@ -326,4 +329,5 @@ public class ScheduleManagerActivity extends AppCompatActivity implements View.O
 
         requestQueue.add(stringRequest);
     }
+
 }

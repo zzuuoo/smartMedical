@@ -26,6 +26,7 @@ import com.google.gson.reflect.TypeToken;
 import com.zuovx.Model.Doctor;
 import com.zuovx.Model.Section;
 import com.zuovx.R;
+import com.zuovx.Utils.ActivityCollector;
 import com.zuovx.Utils.GlobalVar;
 import com.zuovx.Utils.LoadingDialog;
 import com.zuovx.datePicker.CustomDatePicker;
@@ -60,6 +61,7 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_schedule);
+        ActivityCollector.addActivity(this);
         init();
 //        Intent intent = this.getIntent();
 //        doctor = (Doctor) intent.getSerializableExtra("doctor");
@@ -73,11 +75,13 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
                         AddScheduleActivity.this.setResult(1);
                         dialog.close();
 //                        Toast.makeText(EditScheduleActivity.this,"生成票成功",Toast.LENGTH_SHORT).show();
+
                         finish();
                         break;
                     case 2:
                         AddScheduleActivity.this.setResult(0);
                         dialog.close();
+
                         finish();
                     case 3:
                         dialog.close();
@@ -231,6 +235,7 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        ActivityCollector.removeActivity(AddScheduleActivity.this);
         mDatePicker.onDestroy();
     }
 
