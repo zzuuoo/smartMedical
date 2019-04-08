@@ -1,5 +1,6 @@
 package com.zuovx.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
@@ -52,6 +54,7 @@ public class AddDoctorActivity extends AppCompatActivity implements View.OnClick
     private Button sure,cancle;
 
     RadioGroup radioGroup;
+    int sectionId;
 
     private EditText name,password,phone,idNumber,honour;
     @Override
@@ -59,6 +62,8 @@ public class AddDoctorActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_doctor);
         init();
+        Intent intent = getIntent();
+        sectionId = intent.getIntExtra("sectionId",-1);
         ActivityCollector.addActivity(this);
         handler = new Handler(){
             @Override
@@ -67,11 +72,16 @@ public class AddDoctorActivity extends AppCompatActivity implements View.OnClick
                 {
                     case 1:
                         if(sections!=null&&sections.size()>0){
+                            int sid = 0;
                             String[] strings = new String[sections.size()];
                             for(int i=0;i<sections.size();i++){
                                 strings[i] = sections.get(i).getSectionName();
+                                if(sectionId==sections.get(i).getSectionId()){
+                                    sid = i;
+                                }
                             }
                             spinnerSection.setAdapter(new ArrayAdapter<String>(AddDoctorActivity.this,android.R.layout.simple_spinner_item,strings));
+                            spinnerSection.setSelection(sid);
                         }
                         break;
                     case 2:
@@ -204,8 +214,11 @@ public class AddDoctorActivity extends AppCompatActivity implements View.OnClick
                 if(response.body().string().equals("1"))
                 {
                     AddDoctorActivity.this.setResult(1);
+                    Toast.makeText(AddDoctorActivity.this,"succeed",Toast.LENGTH_SHORT).show();
                 }else{
                     AddDoctorActivity.this.setResult(0);
+                    Toast.makeText(AddDoctorActivity.this,"faild",Toast.LENGTH_SHORT).show();
+
                 }
 
                 Message message = new Message();
@@ -228,10 +241,15 @@ public class AddDoctorActivity extends AppCompatActivity implements View.OnClick
                 new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
-                        if(s.equals("1")){
+                        System.out.println(s);
+                        if(s.equals("1"))
+                        {
                             AddDoctorActivity.this.setResult(1);
+                            Toast.makeText(AddDoctorActivity.this,"succeed",Toast.LENGTH_SHORT).show();
                         }else{
                             AddDoctorActivity.this.setResult(0);
+                            Toast.makeText(AddDoctorActivity.this,"faild",Toast.LENGTH_SHORT).show();
+
                         }
                         Message message1 = new Message();
                         message1.what = 2;

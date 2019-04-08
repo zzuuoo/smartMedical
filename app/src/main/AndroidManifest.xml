@@ -4,10 +4,13 @@
     package="com.zuovx">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -47,20 +50,28 @@
         <activity
             android:name=".Activity.AdminActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".Activity.DoctorManagerActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".Activity.ScheduleManagerActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".Activity.TestTimePickerActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".Activity.ChooseScheduleActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".Activity.AddDoctorActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".Activity.AddScheduleActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".Activity.MyBookActivity"
-            android:launchMode="singleTask"></activity>
+        <activity
+            android:name=".Activity.DoctorManagerActivity"
+            android:launchMode="standard" />
+        <activity
+            android:name=".Activity.ScheduleManagerActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".Activity.TestTimePickerActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".Activity.ChooseScheduleActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".Activity.AddDoctorActivity"
+            android:launchMode="standard" />
+        <activity
+            android:name=".Activity.AddScheduleActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".Activity.MyBookActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".Activity.DoctorBookActivity"></activity>
     </application>
 
 </manifest>
