@@ -272,7 +272,6 @@ public class DoctorManagerActivity extends AppCompatActivity implements View.OnC
     protected void onDestroy()
     {
         super.onDestroy();
-        setResult(1);
         ActivityCollector.removeActivity(this);
     }
 
@@ -283,6 +282,7 @@ public class DoctorManagerActivity extends AppCompatActivity implements View.OnC
             case R.id.doctor_add_user:
                 Intent i = new Intent(DoctorManagerActivity.this,
                         AddDoctorActivity.class);
+                i.putExtra("sectionId",sectionId);
                 startActivityForResult(i,1);
                 break;
             default:
@@ -293,17 +293,17 @@ public class DoctorManagerActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onActivityResult(int requestCode,int resultCode,Intent data)
     {
+        System.out.println("request:"+requestCode+" result:"+resultCode);
         if(requestCode==0){
             switch (resultCode)
             {
                 case -1:
 
                     Toast.makeText(getApplication(),"添加值班失败",Toast.LENGTH_SHORT).show();
-
                     break;
                 case 1:
                     Toast.makeText(getApplication(),"添加值班成功",Toast.LENGTH_SHORT).show();;
-
+                    setData();
                     break;
                 default:
                     break;
@@ -316,7 +316,6 @@ public class DoctorManagerActivity extends AppCompatActivity implements View.OnC
                     break;
                 case 0:
                     Toast.makeText(getApplication(),"添加医生失败",Toast.LENGTH_SHORT).show();;
-
                     break;
             }
         }

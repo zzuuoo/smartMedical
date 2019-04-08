@@ -32,8 +32,8 @@ import java.util.List;
 /**
  *
  * 功能：
- * 科室和 医生的增查删改
- * 若删除科室，对应科室的医生也一并删除
+ * 医生的增查删改
+ *
  *
  */
 public class AdminMainFragment extends Fragment implements View.OnClickListener {
