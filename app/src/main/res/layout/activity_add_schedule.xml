@@ -27,7 +27,7 @@
     <!--android:id="@+id/session_schedule_spinner"></Spinner>-->
     <!--</LinearLayout>-->
     <android.support.v7.widget.Toolbar
-        android:id="@+id/arrange_schedule_toolbar"
+        android:id="@+id/arrange_schedule_toolbar_add"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"

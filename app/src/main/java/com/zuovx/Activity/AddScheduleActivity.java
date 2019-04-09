@@ -94,7 +94,7 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
     }
     public void init(){
         //返回键
-        toolbar = findViewById(R.id.arrange_schedule_toolbar);
+        toolbar = findViewById(R.id.arrange_schedule_toolbar_add);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
