@@ -138,6 +138,7 @@ public class DoctorMainFragment extends Fragment implements View.OnClickListener
                 Intent intent = new Intent(getActivity(),DoctorBookActivity.class);
                 intent.putExtra("scheduleId",doctorSche.getSchedule().getScheduleId());
                 intent.putExtra("doctorId",doctorSche.getDoctor().getDoctorId());
+                intent.putExtra("schedule",doctorSche.getSchedule());
                 startActivity(intent);
 //                Toast.makeText(getApplicationContext(),section.getSectionName(),Toast.LENGTH_SHORT).show();
             }
