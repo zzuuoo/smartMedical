@@ -1,9 +1,11 @@
 package com.zuovx.Model;
 
+import java.io.Serializable;
+
 /**
  * 预约
  */
-public class Book {
+public class Book implements Serializable {
     private int bookId;
     private int scheduleId;
     private int patientId;

@@ -1,6 +1,8 @@
 package com.zuovx.Model;
 
-public class BookPatientSche {
+import java.io.Serializable;
+
+public class BookPatientSche implements Serializable {
     private Book book;
     private Patient patient;
     private Schedule schedule;

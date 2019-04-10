@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -71,7 +70,12 @@ public class DoctorBookActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(),"我是book",Toast.LENGTH_SHORT).show();
+                BookPatientSche bookPatientSche = books.get(i);
+                Intent intent = new Intent(DoctorBookActivity.this,AddPatientRecordActivity.class);
+//                intent.putSerializableExtra()
+                intent.putExtra("bookPatientSche",bookPatientSche);
+                startActivity(intent);
+//                Toast.makeText(getApplicationContext(),"我是book",Toast.LENGTH_SHORT).show();
             }
         });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
