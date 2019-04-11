@@ -74,7 +74,7 @@ public class DoctorBookActivity extends AppCompatActivity {
                 Intent intent = new Intent(DoctorBookActivity.this,AddPatientRecordActivity.class);
 //                intent.putSerializableExtra()
                 intent.putExtra("bookPatientSche",bookPatientSche);
-                startActivity(intent);
+                startActivityForResult(intent,1);
 //                Toast.makeText(getApplicationContext(),"我是book",Toast.LENGTH_SHORT).show();
             }
         });
@@ -139,5 +139,19 @@ public class DoctorBookActivity extends AppCompatActivity {
         });
         //将get请求添加到队列中
         requestQueue.add(stringRequest);
+    }
+    @Override
+    protected void onActivityResult(int requestCode,int resultCode,Intent data)
+    {
+        if (requestCode==1){
+//            switch (resultCode){
+//                case 1:
+//                    Toast.makeText(getApplicationContext(),"succeed",Toast.LENGTH_SHORT).show();
+//                    break;
+//                default:
+//                    Toast.makeText(getApplicationContext(),"failed",Toast.LENGTH_SHORT).show();
+//                    break;
+//            }
+        }
     }
 }
