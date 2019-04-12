@@ -15,7 +15,6 @@ import com.zuovx.Model.PatientRecord;
 import com.zuovx.R;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,14 +42,14 @@ public class DoctorRecordFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PatientRecord m = new PatientRecord();
-        m.setAdmissionTime(new Date().getTime());
-        m.setChief("woshizhu数");
-        list.add(m);
-        PatientRecord m1 = new PatientRecord();
-        m1.setAdmissionTime(new Date().getTime());
-        m1.setChief("woshizhu");
-        list.add(m1);
+//        PatientRecord m = new PatientRecord();
+//        m.setAdmissionTime(new Date().getTime());
+//        m.setChief("woshizhu数");
+//        list.add(m);
+//        PatientRecord m1 = new PatientRecord();
+//        m1.setAdmissionTime(new Date().getTime());
+//        m1.setChief("woshizhu");
+//        list.add(m1);
 
     }
 

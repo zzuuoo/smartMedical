@@ -5,7 +5,7 @@ public class PatientRecord {
     private int patientRecordId;
     private int patientId;
     private int doctorId;
-    private long admissionTime;//入院时间
+    private String admissionTime;//入院时间
     private String chief;//主诉
     private String nowHistory;//现病史
     private String pastHistory;//过去病史
@@ -39,11 +39,11 @@ public class PatientRecord {
         this.doctorId = doctorId;
     }
 
-    public long getAdmissionTime() {
+    public String getAdmissionTime() {
         return admissionTime;
     }
 
-    public void setAdmissionTime(long admissionTime) {
+    public void setAdmissionTime(String admissionTime) {
         this.admissionTime = admissionTime;
     }
 
