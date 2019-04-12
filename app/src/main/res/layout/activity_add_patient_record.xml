@@ -3,8 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".Activity.AddPatientRecordActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/add_doctor_book_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay" >
+        <TextView
+            android:id="@+id/add_doctor_title_book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:text="病历编辑 " />
+
+        <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/doctor_add_patient_record"
+        android:textSize="15dp"
+        android:background="@drawable/button_selector"
+        android:layout_gravity="right"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:text="编辑"/>
+    </android.support.v7.widget.Toolbar>
     <LinearLayout
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
