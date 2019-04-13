@@ -12,8 +12,6 @@ import com.zuovx.Activity.MainActivity;
 import com.zuovx.Model.PatientRecord;
 import com.zuovx.R;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class PatientRecordAdapter extends ArrayAdapter<PatientRecord> {
@@ -55,12 +53,12 @@ public class PatientRecordAdapter extends ArrayAdapter<PatientRecord> {
             holder = (ViewHolder)convertView.getTag();
         }
         //设置信息
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-        String date = df.format(new Date(medicalRecord.getAdmissionTime()));// new Date()为获取当前系统时间，也可使用当前时间戳
-        holder.time_of_create.setText(date);
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+//        String date = df.format(new Date(medicalRecord.getAdmissionTime()));// new Date()为获取当前系统时间，也可使用当前时间戳
+        holder.time_of_create.setText(medicalRecord.getAdmissionTime());
         holder.medical_record_patient_name.setText(MainActivity.user.getAccount());
         holder.medical_record_status.setText(medicalRecord.getDiagnosis());
-        holder.medical_record_item_type.setText("住院病历");
+        holder.medical_record_item_type.setText("Demo");
         holder.medical_record_item_introduction.setText( medicalRecord.getChief());
 
         return view;

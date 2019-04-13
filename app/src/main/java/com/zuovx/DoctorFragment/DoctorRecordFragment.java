@@ -1,6 +1,7 @@
 package com.zuovx.DoctorFragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,23 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.zuovx.Activity.MainActivity;
 import com.zuovx.Adapter.PatientRecordAdapter;
 import com.zuovx.Model.PatientRecord;
 import com.zuovx.R;
+import com.zuovx.Utils.GlobalVar;
+import com.zuovx.Utils.LoadingDialog;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 病历管理，病历增查删改
@@ -31,8 +43,11 @@ public class DoctorRecordFragment extends Fragment {
     private ListView listView;
     private SearchView medical_record_searchview;
     private PatientRecordAdapter adapter;
-    private List<PatientRecord> list = new ArrayList<>();
+    private List<PatientRecord> list;
     private TextView textView;
+    private LoadingDialog loadingDialog;
+    private RequestQueue requestQueue;
+    private Handler handler;
 
     public DoctorRecordFragment() {
         // Required empty public constructor
@@ -42,15 +57,13 @@ public class DoctorRecordFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        PatientRecord m = new PatientRecord();
-//        m.setAdmissionTime(new Date().getTime());
-//        m.setChief("woshizhu数");
-//        list.add(m);
-//        PatientRecord m1 = new PatientRecord();
-//        m1.setAdmissionTime(new Date().getTime());
-//        m1.setChief("woshizhu");
-//        list.add(m1);
+//        getPatientRecord();
 
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        getPatientRecord();
     }
 
     @Override
@@ -69,10 +82,8 @@ public class DoctorRecordFragment extends Fragment {
      */
     public void init(View view)
     {
-        adapter = new PatientRecordAdapter(view.getContext(),R.layout.patient_record_item,list);
         listView = view.findViewById(R.id.medical_record_list);
         textView=(TextView)view.findViewById(R.id.nothingMedicalRcord);
-        listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -176,6 +187,63 @@ public class DoctorRecordFragment extends Fragment {
             }
         });
 
+    }
+
+    private void getPatientRecord()  {
+
+        loadingDialog = new LoadingDialog(getContext(),"加载中,,,");
+        loadingDialog.show();
+        requestQueue = Volley.newRequestQueue(getActivity());
+        StringRequest stringRequest = new StringRequest(
+                com.android.volley.Request.Method.POST,
+                GlobalVar.url + "medicalRecord/getPatientRecordByDoctorAccount",
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                        loadingDialog.close();
+                        try {
+                            Gson gson = new Gson();
+                            list = gson.fromJson(s, new TypeToken<List<PatientRecord>>() {}.getType());
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        if(list!=null&&list.size()>0){
+                            adapter = new PatientRecordAdapter(getContext(),R.layout.patient_record_item,list);
+                            listView.setAdapter(adapter);
+                        }
+
+
+                    }
+                }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                loadingDialog.close();
+//                Message message1 = new Message();
+//                message1.what = 4;
+//                handler.sendMessage(message1);
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+//                map.put("patientId",String.valueOf(bookPatientSche.getPatient().getPatientId()));
+//                map.put("doctorId",String.valueOf(bookPatientSche.getSchedule().getDoctorId()));
+//                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//                String date = bookPatientSche.getSchedule().getWorkTimeStart();
+//                Date d = new Date();
+//                try {
+//                    d = format.parse(date);
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+                map.put("account",MainActivity.user.getAccount());
+                return map;
+            }
+
+        };
+
+        requestQueue.add(stringRequest);
     }
 
 }
