@@ -101,7 +101,14 @@ public class DoctorMainFragment extends Fragment implements View.OnClickListener
                     return false;
                 }
                 for(int i=0;i<doctorSches.size();i++){
-                    if(doctorSches.get(i).getSchedule().getWorkTimeStart().contains(newText)||
+                    String t ;
+                    if(doctorSches.get(i).getSchedule().getW()==1){
+                        t = "上午";
+                    }else{
+                        t = "下午";
+                    }
+                    t = doctorSches.get(i).getSchedule().getWorkTimeStart()+ " "+t;
+                    if(t.contains(newText)||
                             doctorSches.get(i).getDoctor().getName().contains(newText)){
                         doctorSchesSeach.add(doctorSches.get(i));
                     }

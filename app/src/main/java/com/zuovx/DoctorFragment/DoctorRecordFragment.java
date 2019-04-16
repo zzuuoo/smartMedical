@@ -1,5 +1,6 @@
 package com.zuovx.DoctorFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -19,8 +20,9 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zuovx.Activity.MainActivity;
+import com.zuovx.Activity.ShowPatientRecordActivity;
 import com.zuovx.Adapter.PatientRecordAdapter;
-import com.zuovx.Model.PatientRecord;
+import com.zuovx.Model.PPatientRecord;
 import com.zuovx.R;
 import com.zuovx.Utils.GlobalVar;
 import com.zuovx.Utils.LoadingDialog;
@@ -43,11 +45,13 @@ public class DoctorRecordFragment extends Fragment {
     private ListView listView;
     private SearchView medical_record_searchview;
     private PatientRecordAdapter adapter;
-    private List<PatientRecord> list;
+    private List<PPatientRecord> list,searchlist;
     private TextView textView;
     private LoadingDialog loadingDialog;
     private RequestQueue requestQueue;
     private Handler handler;
+    private boolean isSearch = false;
+//    private List<PPatientRecord> list1;
 
     public DoctorRecordFragment() {
         // Required empty public constructor
@@ -57,7 +61,6 @@ public class DoctorRecordFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getPatientRecord();
 
     }
     @Override
@@ -87,27 +90,26 @@ public class DoctorRecordFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Play p;
-//                if(isSearch){
-//                    p = searchlist.get(i);
-//                }else{
-//                    p = list.get(i);
-//                }
-//                Intent intent = new Intent(PlayManageActivity.this, PlayEditActivity.class);
-//                intent.putExtra("play", p);
-//                startActivityForResult(intent,2);//到时候重写那个返回调用函数
-//                Toast.makeText(getApplication(),p.getPlay_name(),Toast.LENGTH_SHORT).show();
+                PPatientRecord pPatientRecord;
+                if(isSearch){
+                    pPatientRecord = searchlist.get(i);
+                }else{
+                    pPatientRecord = list.get(i);
+                }
+                Intent intent = new Intent(getActivity(),ShowPatientRecordActivity.class);
+                intent.putExtra("PPatientRecord",pPatientRecord);
+                startActivity(intent);
             }
         });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Play p;
-//                if(isSearch){
-//                    p = searchlist.get(i);
-//                }else{
-//                    p = list.get(i);
-//                }
+               PPatientRecord pPatientRecord;
+                if(isSearch){
+                    pPatientRecord = searchlist.get(i);
+                }else{
+                    pPatientRecord = list.get(i);
+                }
 //                AlertDialog.Builder dialog = new AlertDialog.Builder(PlayManageActivity.this);
 //                dialog.setTitle("警告");
 //                dialog.setMessage("确认删除吗？");
@@ -188,7 +190,53 @@ public class DoctorRecordFragment extends Fragment {
         });
 
     }
-
+//    public void getRecord(){
+//        //创建一个请求队列
+//
+//        loadingDialog = new LoadingDialog(getActivity(),"数据读取中");
+//        loadingDialog.show();
+//        requestQueue = Volley.newRequestQueue(getActivity());
+//        //创建一个请求
+//
+//        StringRequest stringRequest =new StringRequest(GlobalVar.url +"medicalRecord/getBookPatientByDoctorAccount?account="+MainActivity.user.getAccount(), new Response.Listener<String>() {
+//            //正确接收数据回调
+//            @Override
+//            public void onResponse(String s) {
+//                try {
+//                    System.out.println(s);
+//                    Gson gson = new Gson();
+//                    list = gson.fromJson(s, new TypeToken<List<PPatientRecord>>() {}.getType());
+//
+//                    Log.d("PatientRecord:",list.toString());
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//                loadingDialog.close();
+//                if(list==null||list.size()==0)
+//                {
+//                    textView.setVisibility(View.VISIBLE);
+//                }else{
+//                    textView.setVisibility(View.GONE);
+//                    PatientRecordAdapter adapter =
+//                            new PatientRecordAdapter(getActivity(),
+//                                    R.layout.patient_record_item,list);
+//                    listView.setAdapter(adapter);
+//                }
+//
+//
+//            }
+//        }, new Response.ErrorListener() {//异常后的监听数据
+//            @Override
+//            public void onErrorResponse(VolleyError volleyError) {
+////                volley_result.setText("加载错误"+volleyError);
+//                loadingDialog.close();
+//                textView.setVisibility(View.VISIBLE);
+//            }
+//        });
+//        //将get请求添加到队列中
+//        requestQueue.add(stringRequest);
+//    }
     private void getPatientRecord()  {
 
         loadingDialog = new LoadingDialog(getContext(),"加载中,,,");
@@ -196,14 +244,14 @@ public class DoctorRecordFragment extends Fragment {
         requestQueue = Volley.newRequestQueue(getActivity());
         StringRequest stringRequest = new StringRequest(
                 com.android.volley.Request.Method.POST,
-                GlobalVar.url + "medicalRecord/getPatientRecordByDoctorAccount",
+                GlobalVar.url + "medicalRecord/getBookPatientByDoctorAccount",
                 new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
                         loadingDialog.close();
                         try {
                             Gson gson = new Gson();
-                            list = gson.fromJson(s, new TypeToken<List<PatientRecord>>() {}.getType());
+                            list = gson.fromJson(s, new TypeToken<List<PPatientRecord>>() {}.getType());
 
                         } catch (Exception e) {
                             e.printStackTrace();

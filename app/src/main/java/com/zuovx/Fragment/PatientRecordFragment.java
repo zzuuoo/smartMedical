@@ -1,5 +1,6 @@
 package com.zuovx.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -19,7 +20,9 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zuovx.Activity.MainActivity;
+import com.zuovx.Activity.ShowPatientRecordActivity;
 import com.zuovx.Adapter.PatientRecordAdapter;
+import com.zuovx.Model.PPatientRecord;
 import com.zuovx.Model.PatientRecord;
 import com.zuovx.R;
 import com.zuovx.Utils.GlobalVar;
@@ -46,6 +49,8 @@ public class PatientRecordFragment extends Fragment {
     private TextView textView;
     private LoadingDialog loadingDialog;
     private RequestQueue requestQueue;
+    private List<PPatientRecord> list1,searchList;
+    private boolean isSearch = false;
 
     public PatientRecordFragment() {
         // Required empty public constructor
@@ -55,18 +60,7 @@ public class PatientRecordFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if(MainActivity.isLogin)
-//        {
-//            getRecord(MainActivity.user.getAccount());
-//        }
-//        PatientRecord m = new PatientRecord();
-//        m.setAdmissionTime(new Date());
-//        m.setChief("woshizhu数");
-//        list.add(m);
-//        PatientRecord m1 = new PatientRecord();
-//        m1.setAdmissionTime(new Date());
-//        m1.setChief("woshizhu");
-//        list.add(m1);
+
 
     }
 
@@ -101,16 +95,15 @@ public class PatientRecordFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Play p;
-//                if(isSearch){
-//                    p = searchlist.get(i);
-//                }else{
-//                    p = list.get(i);
-//                }
-//                Intent intent = new Intent(PlayManageActivity.this, PlayEditActivity.class);
-//                intent.putExtra("play", p);
-//                startActivityForResult(intent,2);//到时候重写那个返回调用函数
-//                Toast.makeText(getApplication(),p.getPlay_name(),Toast.LENGTH_SHORT).show();
+                PPatientRecord pPatientRecord;
+                if(isSearch){
+                    pPatientRecord = searchList.get(i);
+                }else{
+                    pPatientRecord = list1.get(i);
+                }
+                Intent intent = new Intent(getActivity(),ShowPatientRecordActivity.class);
+                intent.putExtra("PPatientRecord",pPatientRecord);
+                startActivity(intent);
             }
         });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -230,9 +223,15 @@ public class PatientRecordFragment extends Fragment {
                     textView.setVisibility(View.VISIBLE);
                 }else{
                     textView.setVisibility(View.GONE);
+                    list1 = new ArrayList<>();
+                    for(int i=0;i<list.size();i++){
+                        PPatientRecord p = new PPatientRecord();
+                        p.setPatientRecord(list.get(i));
+                        list1.add(p);
+                    }
                     PatientRecordAdapter adapter =
                             new PatientRecordAdapter(getActivity(),
-                                    R.layout.patient_record_item,list);
+                                    R.layout.patient_record_item,list1);
                     listView.setAdapter(adapter);
                 }
 

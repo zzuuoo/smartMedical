@@ -72,7 +72,9 @@
             android:name=".Activity.MyBookActivity"
             android:launchMode="singleTask" />
         <activity android:name=".Activity.DoctorBookActivity" />
-        <activity android:name=".Activity.AddPatientRecordActivity"></activity>
+        <activity android:name=".Activity.AddPatientRecordActivity" />
+        <activity android:name=".Activity.ShowPatientRecordActivity" />
+        <activity android:name=".Activity.EditMyselfctivity"></activity>
     </application>
 
 </manifest>
