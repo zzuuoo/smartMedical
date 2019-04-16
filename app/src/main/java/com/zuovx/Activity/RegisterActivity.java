@@ -128,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity
                 break;
             case R.id.registerSure:
                 SMSSDK.submitVerificationCode(country, phone.getText().toString(), code.getText().toString());
-//                Toast.makeText(this,"成功，进入信息完善界面",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"成功，进入信息完善界面",Toast.LENGTH_SHORT).show();
                 break;
                 default:
                     break;

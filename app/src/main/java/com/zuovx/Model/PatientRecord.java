@@ -1,6 +1,8 @@
 package com.zuovx.Model;
 
-public class PatientRecord {
+import java.io.Serializable;
+
+public class PatientRecord implements Serializable {
 
     private int patientRecordId;
     private int patientId;

@@ -210,7 +210,8 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
     private void initDatePicker() {
 
 //        long beginTimestamp = DateFormatUtils.str2Long("2009-05-01", false);
-        long beginTimestamp = System.currentTimeMillis();
+        long day = 86400000;
+        long beginTimestamp = System.currentTimeMillis()+day;
         long mon = 2592000000l;
         long endTimestamp = System.currentTimeMillis()+mon;
 
