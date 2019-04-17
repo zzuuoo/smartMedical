@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zuovx.Activity.EditAdminActivity;
 import com.zuovx.Activity.LoginActivity;
 import com.zuovx.Activity.MainActivity;
 import com.zuovx.R;
@@ -134,8 +135,9 @@ public class AdminPersionalFragment extends Fragment implements View.OnClickList
 //                    getActivity().finish();
                     startActivity(new Intent(getContext(), LoginActivity.class));
                 }else{
+                    startActivity(new Intent(getActivity(),EditAdminActivity.class));
                     //此处应该跳进个人资料，然后可以修改、完善个人资料
-                    Toast.makeText(getContext(),"进入个人资料",Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getContext(),"进入个人资料",Toast.LENGTH_LONG).show();
                 }
             }
         });

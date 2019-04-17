@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zuovx.Activity.EditMyselfDoctorActivity;
 import com.zuovx.Activity.LoginActivity;
 import com.zuovx.Activity.MainActivity;
 import com.zuovx.R;
@@ -144,7 +145,9 @@ public class DoctorPersionalFragment extends Fragment implements View.OnClickLis
                     startActivity(new Intent(getContext(), LoginActivity.class));
                 }else{
                     //此处应该跳进个人资料，然后可以修改、完善个人资料
-                    Toast.makeText(getContext(),"进入个人资料",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getActivity(),EditMyselfDoctorActivity.class);
+                    startActivity(intent);
+//                    Toast.makeText(getContext(),"进入个人资料",Toast.LENGTH_LONG).show();
                 }
             }
         });

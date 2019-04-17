@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activity.EditMyselfctivity">
+    tools:context=".Activity.EditMyselfDoctorActivity">
     <LinearLayout
         android:layout_marginTop="80dp"
         android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
             android:textColor="#000000"
             android:gravity="center"
             android:background="@drawable/shape_button"
-            android:id="@+id/edit_patient_name"/>
+            android:id="@+id/edit_doctor_name"/>
     </LinearLayout>
     <LinearLayout
         android:layout_marginTop="10dp"
@@ -49,10 +49,80 @@
             android:gravity="center"
             android:inputType="number"
             android:background="@drawable/shape_button"
-            android:id="@+id/edit_patient_phone"/>
+            android:id="@+id/edit_doctor_phone"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="特长："
+            android:textColor="#000000"
+            android:textSize="24dp"/>
+        <EditText
+            android:layout_width="240dp"
+            android:layout_height="40dp"
+            android:hint="输入特长"
+            android:textColor="#000000"
+            android:inputType="text"
+            android:gravity="center"
+            android:background="@drawable/shape_button"
+            android:id="@+id/edit_doctor_fotre"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:textColor="#000000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="简介："
+            android:textSize="24dp"/>
+        <EditText
+            android:layout_width="240dp"
+            android:layout_height="40dp"
+            android:hint="输入简介"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:background="@drawable/shape_button"
+            android:id="@+id/edit_doctor_introduction"/>
+    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:gravity="center_vertical"-->
+        <!--&gt;-->
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:textColor="#000000"-->
+            <!--android:text="地址："-->
+            <!--android:textSize="24dp"/>-->
+        <!--<EditText-->
+            <!--android:layout_width="240dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:hint="请输入地址"-->
+            <!--android:inputType="textPostalAddress"-->
+            <!--android:textColor="#000000"-->
+            <!--android:gravity="center"-->
+            <!--android:background="@drawable/shape_button"-->
+            <!--android:id="@+id/edit_doctor_address"/>-->
 
-
+    <!--</LinearLayout>-->
     <LinearLayout
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
@@ -75,32 +145,7 @@
             android:textColor="#000000"
             android:gravity="center"
             android:background="@drawable/shape_button"
-            android:id="@+id/edit_patient_age"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="地址："
-            android:textColor="#000000"
-            android:textSize="24dp"/>
-        <EditText
-            android:layout_width="240dp"
-            android:layout_height="40dp"
-            android:hint="请输入地址"
-            android:inputType="text"
-            android:textColor="#000000"
-            android:gravity="center"
-            android:background="@drawable/shape_button"
-            android:id="@+id/edit_patient_address"/>
+            android:id="@+id/edit_doctor_age"/>
     </LinearLayout>
 
     <LinearLayout
@@ -120,10 +165,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/edit_patient_radiogroup_user">
+            android:id="@+id/edit_doctor_radiogroup_user">
             <RadioButton
                 android:layout_width="wrap_content"
-                android:id="@+id/edit_patient_boy"
+                android:id="@+id/edit_doctor_boy"
                 android:text="男"
                 android:textColor="#000000"
                 android:checked="true"
@@ -131,7 +176,7 @@
             <RadioButton
                 android:text="女"
                 android:textColor="#000000"
-                android:id="@+id/edit_patient_girl"
+                android:id="@+id/edit_doctor_girl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RadioGroup>
@@ -151,14 +196,14 @@
             android:text="确定"
             android:textColor="@color/green"
             android:textSize="24dp"
-            android:id="@+id/sure_edit_patient"
+            android:id="@+id/sure_editDoctor"
             android:background="@drawable/button_selector"
             android:layout_marginRight="10dp"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:text="取消"
-            android:id="@+id/cancel_edit_patient"
+            android:id="@+id/cancel_editDoctor"
             android:layout_marginLeft="10dp"
             android:textColor="@color/red"
             android:textSize="24dp"
