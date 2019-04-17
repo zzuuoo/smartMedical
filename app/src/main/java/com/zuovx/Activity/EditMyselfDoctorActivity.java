@@ -19,7 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.zuovx.Model.Patient;
+import com.zuovx.Model.Doctor;
 import com.zuovx.R;
 import com.zuovx.Utils.ActivityCollector;
 import com.zuovx.Utils.GlobalVar;
@@ -28,13 +28,13 @@ import com.zuovx.Utils.LoadingDialog;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditMyselfctivity extends AppCompatActivity implements View.OnClickListener {
+public class EditMyselfDoctorActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText name,phone,address,forte,introduction,age;
     private RadioGroup sexs;
     private RadioButton boy,girl;
     private Button sure,cancle;
-    private Patient patient;
+    private Doctor doctor;
 
     private RequestQueue requestQueue;
     private LoadingDialog loadingDialog;
@@ -44,7 +44,7 @@ public class EditMyselfctivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_myselfctivity);
+        setContentView(R.layout.activity_edit_myself_doctor);
         ActivityCollector.addActivity(this);
         init();
         handler = new Handler(){
@@ -68,27 +68,31 @@ public class EditMyselfctivity extends AppCompatActivity implements View.OnClick
         };
     }
     public void init(){
-        name = findViewById(R.id.edit_patient_name);
-        phone = findViewById(R.id.edit_patient_phone);
-        address = findViewById(R.id.edit_patient_address);
-        age = findViewById(R.id.edit_patient_age);
-        boy = findViewById(R.id.edit_patient_boy);
-        girl = findViewById(R.id.edit_patient_girl);
-        sure = findViewById(R.id.sure_edit_patient);
-        cancle = findViewById(R.id.cancel_edit_patient);
+        name = findViewById(R.id.edit_doctor_name);
+        phone = findViewById(R.id.edit_doctor_phone);
+//        address = findViewById(R.id.edit_doctor_address);
+        forte = findViewById(R.id.edit_doctor_fotre);
+        introduction = findViewById(R.id.edit_doctor_introduction);
+        age = findViewById(R.id.edit_doctor_age);
+        sexs = findViewById(R.id.edit_doctor_radiogroup_user);
+        boy = findViewById(R.id.edit_doctor_boy);
+        girl = findViewById(R.id.edit_doctor_girl);
+        sure = findViewById(R.id.sure_editDoctor);
+        cancle = findViewById(R.id.cancel_editDoctor);
         sure.setOnClickListener(this);
         cancle.setOnClickListener(this);
-        getPatient();
+        getDoctor();
 
     }
 
     public void initshow(){
-        if(patient!=null){
-            name.setText(patient.getName());
-            age.setText(String.valueOf(patient.getAge()));
-            phone.setText(patient.getPhone());
-            address.setText(patient.getAddress());
-            if(patient.getSex()==0){
+        if(doctor!=null){
+            name.setText(doctor.getName());
+            age.setText(String.valueOf(doctor.getAge()));
+            forte.setText(doctor.getForte());
+            phone.setText(doctor.getPhone());
+            introduction.setText(doctor.getIntroduction());
+            if(doctor.getSex()==0){
                 girl.setChecked(true);
             }else{
                 boy.setChecked(true);
@@ -96,21 +100,21 @@ public class EditMyselfctivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    public void getPatient(){
+    public void getDoctor(){
         loadingDialog = new LoadingDialog(this,"数据读取中...");
         loadingDialog.show();
         requestQueue = Volley.newRequestQueue(this);
         //创建一个请求
 
         StringRequest stringRequest =new StringRequest(GlobalVar.url
-                +"user/getPatientByAccount?account="+MainActivity.user.getAccount(), new Response.Listener<String>() {
+                +"user/getDoctorByAccount?account="+MainActivity.user.getAccount(), new Response.Listener<String>() {
             //正确接收数据回调
             @Override
             public void onResponse(String s) {
                 loadingDialog.close();
                 try {
                     Gson gson = new Gson();
-                    patient = gson.fromJson(s, new TypeToken<Patient>() {}.getType());
+                    doctor = gson.fromJson(s, new TypeToken<Doctor>() {}.getType());
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -131,14 +135,14 @@ public class EditMyselfctivity extends AppCompatActivity implements View.OnClick
     }
 
 
-    private void savePatient()  {
+    private void saveDoctor()  {
 
-        loadingDialog = new LoadingDialog(EditMyselfctivity.this,"加载中,,,");
+        loadingDialog = new LoadingDialog(EditMyselfDoctorActivity.this,"加载中,,,");
         loadingDialog.show();
         requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(
                 com.android.volley.Request.Method.POST,
-                GlobalVar.url + "user/updatePatient",
+                GlobalVar.url + "user/updateDoctor",
                 new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
@@ -146,10 +150,10 @@ public class EditMyselfctivity extends AppCompatActivity implements View.OnClick
                         if(s.equals("1"))
                         {
 //                            AddDoctorActivity.this.setResult(1);
-                            Toast.makeText(EditMyselfctivity.this,"succeed",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditMyselfDoctorActivity.this,"succeed",Toast.LENGTH_SHORT).show();
                         }else{
 //                            AddDoctorActivity.this.setResult(0);
-                            Toast.makeText(EditMyselfctivity.this,"faild",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditMyselfDoctorActivity.this,"faild",Toast.LENGTH_SHORT).show();
 
                         }
                         Message message1 = new Message();
@@ -173,9 +177,10 @@ public class EditMyselfctivity extends AppCompatActivity implements View.OnClick
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("name",name.getText().toString());//传入参数
                 map.put("phone",phone.getText().toString());//传入参数
-                map.put("address",address.getText().toString());
-                map.put("patientId",patient.getPatientId().toString());//传入参数
+                map.put("doctorId",doctor.getDoctorId().toString());//传入参数
                 map.put("age",age.getText().toString());//传入参数
+                map.put("introduction",introduction.getText().toString());//传入参数
+                map.put("forte",forte.getText().toString());//传入参数
                 map.put("account",MainActivity.user.getAccount());
                 String sex = "0";
                 if(boy.isChecked()){
@@ -194,14 +199,14 @@ public class EditMyselfctivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.cancel_edit_patient:
+            case R.id.cancel_editDoctor:
                 finish();
                 break;
-            case R.id.sure_edit_patient:
-                savePatient();
+            case R.id.sure_editDoctor:
+                saveDoctor();
                 break;
-            default:
-                break;
+                default:
+                    break;
         }
 
     }
