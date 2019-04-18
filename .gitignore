@@ -1,12 +1,11 @@
 *.iml
 .gradle
+.idea
 /local.properties
 /.idea/caches/build_file_checksums.ser
 /.idea/libraries
 /.idea/modules.xml
 /.idea/workspace.xml
-.idea
-/.idea/
 .DS_Store
 /build
 /captures
