@@ -148,9 +148,10 @@ public class DoctorManagerActivity extends AppCompatActivity implements View.OnC
                 }else{
                     d=doctors.get(i);
                 }
-//                Intent intent = new Intent(DoctorManagerActivity.this,ScheduleManagerActivity.class);
-//                intent.putExtra("doctor",d);
-//                startActivityForResult(intent,0);
+                Intent intent = new Intent(DoctorManagerActivity.this,EditDoctorActivity.class);
+                intent.putExtra("doctor",d);
+                startActivityForResult(intent,0);
+
                 Toast.makeText(getApplicationContext(),d.getName(),Toast.LENGTH_SHORT).show();
             }
         });

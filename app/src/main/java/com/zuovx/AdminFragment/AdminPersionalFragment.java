@@ -26,11 +26,11 @@ public class AdminPersionalFragment extends Fragment implements View.OnClickList
     private TextView userNickName;
     private ImageView head_image;
     private RelativeLayout personalData;
-    private ListMenuItemView userOrder;
+//    private ListMenuItemView userOrder;
     private ListMenuItemView logout;
-    private ListMenuItemView outpatientRecharge;
+//    private ListMenuItemView outpatientRecharge;
     private ListMenuItemView medicalFeedBack;
-    private ListMenuItemView myqueue;
+//    private ListMenuItemView myqueue;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,19 +38,19 @@ public class AdminPersionalFragment extends Fragment implements View.OnClickList
         userNickName= view.findViewById(R.id.admin_me_layout_name_tips);
         head_image = view.findViewById(R.id.admin_me_layout_head_image);
         personalData = view.findViewById(R.id.admin_personalData);
-        outpatientRecharge = view.findViewById(R.id.admin_outpatientRecharge);
+//        outpatientRecharge = view.findViewById(R.id.admin_outpatientRecharge);
         medicalFeedBack = view.findViewById(R.id.admin_Medical_feedback);
-        myqueue = view.findViewById(R.id.admin_MyQueue);
-        myqueue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                dialog.setTitle("我的就医队列");
-                dialog.setMessage("待完成");
-                dialog.setCancelable(true);
-                dialog.show();
-            }
-        });
+//        myqueue = view.findViewById(R.id.admin_MyQueue);
+//        myqueue.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+//                dialog.setTitle("我的就医队列");
+//                dialog.setMessage("待完成");
+//                dialog.setCancelable(true);
+//                dialog.show();
+//            }
+//        });
         medicalFeedBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,19 +61,17 @@ public class AdminPersionalFragment extends Fragment implements View.OnClickList
                 dialog.show();
             }
         });
-        outpatientRecharge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                dialog.setTitle("门诊充值");
-                dialog.setMessage("待完成");
-                dialog.setCancelable(true);
-                dialog.show();
-
-//                Intent intent = new Intent(getContext(), TestActivity.class);
-//                startActivity(intent);
-            }
-        });
+//        outpatientRecharge.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+//                dialog.setTitle("门诊充值");
+//                dialog.setMessage("待完成");
+//                dialog.setCancelable(true);
+//                dialog.show();
+//
+//            }
+//        });
         logout = view.findViewById(R.id.admin_me_layout_logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,21 +110,21 @@ public class AdminPersionalFragment extends Fragment implements View.OnClickList
                 }
             }
         });
-        userOrder= view.findViewById(R.id.admin_MyOrder);
-        userOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!MainActivity.isLogin)
-                {
-                    Toast.makeText(getContext(),"未登录，请先登录",Toast.LENGTH_SHORT).show();
-
-                }else{
-                    Toast.makeText(getContext(),"订单信息",Toast.LENGTH_LONG).show();
-                }
-//                Toast.makeText(getContext(),"订单信息",Toast.LENGTH_LONG).show();
-//                startActivity(new Intent(getContext(), ShowSaleActivity.class));
-            }
-        });
+//        userOrder= view.findViewById(R.id.admin_MyOrder);
+//        userOrder.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(!MainActivity.isLogin)
+//                {
+//                    Toast.makeText(getContext(),"未登录，请先登录",Toast.LENGTH_SHORT).show();
+//
+//                }else{
+//                    Toast.makeText(getContext(),"订单信息",Toast.LENGTH_LONG).show();
+//                }
+////                Toast.makeText(getContext(),"订单信息",Toast.LENGTH_LONG).show();
+////                startActivity(new Intent(getContext(), ShowSaleActivity.class));
+//            }
+//        });
         personalData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

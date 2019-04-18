@@ -76,7 +76,8 @@
         <activity android:name=".Activity.ShowPatientRecordActivity" />
         <activity android:name=".Activity.EditMyselfctivity" />
         <activity android:name=".Activity.EditMyselfDoctorActivity" />
-        <activity android:name=".Activity.EditAdminActivity"></activity>
+        <activity android:name=".Activity.EditAdminActivity" />
+        <activity android:name=".Activity.EditDoctorActivity"></activity>
     </application>
 
 </manifest>
