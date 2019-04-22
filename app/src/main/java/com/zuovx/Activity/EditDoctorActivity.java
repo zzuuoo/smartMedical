@@ -195,7 +195,7 @@ public class EditDoctorActivity extends AppCompatActivity implements View.OnClic
         requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(
                 com.android.volley.Request.Method.POST,
-                GlobalVar.url + "user/updateDoctor",
+                GlobalVar.url + "user/editDoctor",
                 new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
@@ -237,6 +237,7 @@ public class EditDoctorActivity extends AppCompatActivity implements View.OnClic
                 if (password.getText() != null &&
                         password.getText().toString() != null &&
                         password.getText().toString() != "") {
+                    System.out.println("更新医生密码"+password.getText().toString());
                     map.put("password",password.getText().toString());//传入参数
 
                 }

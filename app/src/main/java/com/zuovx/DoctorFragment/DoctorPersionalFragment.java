@@ -43,12 +43,12 @@ public class DoctorPersionalFragment extends Fragment implements View.OnClickLis
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_personal,container,false);
-        userNickName= view.findViewById(R.id.me_layout_name_tips);
-        head_image = view.findViewById(R.id.me_layout_head_image);
-        personalData = view.findViewById(R.id.personalData);
+        view=inflater.inflate(R.layout.fragment_doctor_persional,container,false);
+        userNickName= view.findViewById(R.id.doctor_me_layout_name_tips);
+        head_image = view.findViewById(R.id.doctor_me_layout_head_image);
+        personalData = view.findViewById(R.id.doctor_personalData);
 //        outpatientRecharge = view.findViewById(R.id.outpatientRecharge);
-        medicalFeedBack = view.findViewById(R.id.Medical_feedback);
+        medicalFeedBack = view.findViewById(R.id.doctor_Medical_feedback);
 //        myqueue = view.findViewById(R.id.MyQueue);
 //        myqueue.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -83,7 +83,7 @@ public class DoctorPersionalFragment extends Fragment implements View.OnClickLis
 ////                startActivity(intent);
 //            }
 //        });
-        logout = view.findViewById(R.id.me_layout_logout);
+        logout = view.findViewById(R.id.doctor_me_layout_logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,7 +151,7 @@ public class DoctorPersionalFragment extends Fragment implements View.OnClickLis
                 }
             }
         });
-        view.findViewById(R.id.me_layout_exit).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.doctor_me_layout_exit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
