@@ -6,7 +6,7 @@
     >
 
     <RelativeLayout
-        android:id="@+id/me_layout_head"
+        android:id="@+id/doctor_me_layout_head"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_alignParentStart="true"
@@ -19,14 +19,14 @@
 
 
         <RelativeLayout
-            android:id="@+id/personalData"
+            android:id="@+id/doctor_personalData"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true">
 
             <ImageView
-                android:id="@+id/me_layout_head_image"
+                android:id="@+id/doctor_me_layout_head_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_centerHorizontal="true"
@@ -35,7 +35,7 @@
                 android:src="@drawable/home_people" />
 
             <TextView
-                android:id="@+id/me_layout_name_tips"
+                android:id="@+id/doctor_me_layout_name_tips"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/me_layout_head_image"
@@ -50,15 +50,15 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/me_layout_body"
-        android:layout_below="@id/me_layout_head"
+        android:id="@+id/doctor_me_layout_body"
+        android:layout_below="@id/doctor_me_layout_head"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFF"
         >
 
         <android.support.v7.view.menu.ListMenuItemView
-            android:id="@+id/Medical_feedback"
+            android:id="@+id/doctor_Medical_feedback"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -83,81 +83,81 @@
 
         </android.support.v7.view.menu.ListMenuItemView>
 
+        <!--<android.support.v7.view.menu.ListMenuItemView-->
+        <!--android:id="@+id/MyOrder"-->
+        <!--android:layout_below="@id/Medical_feedback"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--&gt;-->
+        <!--<ImageView-->
+        <!--android:layout_width="30dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:src="@drawable/caselist"-->
+        <!--android:layout_marginLeft="20dp" />-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:text="我的账单"-->
+        <!--android:textSize="15sp"-->
+        <!--android:textColor="@color/primaryBlack"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_marginLeft="20dp" />-->
+
+        <!--</android.support.v7.view.menu.ListMenuItemView>-->
+
+        <!--<android.support.v7.view.menu.ListMenuItemView-->
+        <!--android:id="@+id/MyQueue"-->
+        <!--android:layout_below="@id/MyOrder"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--&gt;-->
+        <!--<ImageView-->
+        <!--android:layout_width="30dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:src="@drawable/locator"-->
+        <!--android:layout_marginLeft="20dp" />-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:text="我的排队"-->
+        <!--android:textSize="15sp"-->
+        <!--android:textColor="@color/primaryBlack"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_marginLeft="20dp" />-->
+
+        <!--</android.support.v7.view.menu.ListMenuItemView>-->
+
+        <!--<android.support.v7.view.menu.ListMenuItemView-->
+        <!--android:id="@+id/outpatientRecharge"-->
+        <!--android:layout_below="@id/MyQueue"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--&gt;-->
+        <!--<ImageView-->
+        <!--android:layout_width="30dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:src="@drawable/aboutus"-->
+        <!--android:layout_marginLeft="20dp" />-->
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:text="门诊充值"-->
+        <!--android:textSize="15sp"-->
+        <!--android:textColor="@color/primaryBlack"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_marginLeft="20dp" />-->
+
+        <!--</android.support.v7.view.menu.ListMenuItemView>-->
+
         <android.support.v7.view.menu.ListMenuItemView
-            android:id="@+id/MyOrder"
-            android:layout_below="@id/Medical_feedback"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            >
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="50dp"
-                android:src="@drawable/caselist"
-                android:layout_marginLeft="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="我的账单"
-                android:textSize="15sp"
-                android:textColor="@color/primaryBlack"
-                android:gravity="center"
-                android:layout_marginLeft="20dp" />
-
-        </android.support.v7.view.menu.ListMenuItemView>
-
-        <android.support.v7.view.menu.ListMenuItemView
-            android:id="@+id/MyQueue"
-            android:layout_below="@id/MyOrder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            >
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="50dp"
-                android:src="@drawable/locator"
-                android:layout_marginLeft="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="我的排队"
-                android:textSize="15sp"
-                android:textColor="@color/primaryBlack"
-                android:gravity="center"
-                android:layout_marginLeft="20dp" />
-
-        </android.support.v7.view.menu.ListMenuItemView>
-
-        <android.support.v7.view.menu.ListMenuItemView
-            android:id="@+id/outpatientRecharge"
-            android:layout_below="@id/MyQueue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            >
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="50dp"
-                android:src="@drawable/aboutus"
-                android:layout_marginLeft="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="门诊充值"
-                android:textSize="15sp"
-                android:textColor="@color/primaryBlack"
-                android:gravity="center"
-                android:layout_marginLeft="20dp" />
-
-        </android.support.v7.view.menu.ListMenuItemView>
-
-        <android.support.v7.view.menu.ListMenuItemView
-            android:id="@+id/me_layout_exit"
-            android:layout_below="@id/outpatientRecharge"
+            android:id="@+id/doctor_me_layout_exit"
+            android:layout_below="@id/doctor_Medical_feedback"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -180,9 +180,9 @@
         </android.support.v7.view.menu.ListMenuItemView>
 
         <android.support.v7.view.menu.ListMenuItemView
-            android:id="@+id/me_layout_logout"
+            android:id="@+id/doctor_me_layout_logout"
             android:clickable="true"
-            android:layout_below="@id/me_layout_exit"
+            android:layout_below="@id/doctor_me_layout_exit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
