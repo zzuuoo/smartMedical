@@ -67,7 +67,7 @@
         <EditText
             android:layout_width="240dp"
             android:layout_height="40dp"
-            android:hint="初始密码(不输默认为手机)"
+            android:hint="初始密码"
             android:textColor="#000000"
             android:inputType="textVisiblePassword"
             android:gravity="center"

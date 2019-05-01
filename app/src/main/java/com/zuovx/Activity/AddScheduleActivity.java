@@ -248,6 +248,10 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
                 break;
             case R.id.sure_editschedule:
 //                MakeSchedule();
+                if(scheduleRemainder.getText().toString().equals("")){
+                    Toast.makeText(this,"请填合法数据",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 if (doctors==null||doctors.size()<1||sections==null
                         ||sections.size()<1||Integer.valueOf(scheduleRemainder.getText().toString())<1){
                     Toast.makeText(this,"请填合法数据",Toast.LENGTH_SHORT).show();

@@ -42,31 +42,41 @@
             android:inputType="phone"
             android:hint="@string/phone" />
 
-
-
-        <LinearLayout
+        <EditText
+            android:id="@+id/registerPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/verification"
-                android:layout_gravity="center_horizontal"
-                android:inputType="number"
-                android:ems="6"
-                android:hint="@string/verification"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sendVerification"
-                android:ems="2"
-                android:id="@+id/sendVerification"
-                android:clickable="true"
-                android:background="@drawable/qmui_list_item_bg_with_double_border_pressed"/>
-        </LinearLayout>
+            android:ems="10"
+            android:layout_gravity="center_horizontal"
+            android:inputType="textPassword"
+            android:hint="密码" />
+
+
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:orientation="horizontal">-->
+            <!--<EditText-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/verification"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:inputType="number"-->
+                <!--android:ems="6"-->
+                <!--android:hint="@string/verification"/>-->
+            <!--<Button-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/sendVerification"-->
+                <!--android:ems="2"-->
+                <!--android:id="@+id/sendVerification"-->
+                <!--android:clickable="true"-->
+                <!--android:background="@drawable/qmui_list_item_bg_with_double_border_pressed"/>-->
+        <!--</LinearLayout>-->
 
 
         <LinearLayout

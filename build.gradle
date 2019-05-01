@@ -5,6 +5,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+
 //        maven { url 'https://plugins.gradle.org/m2/' }
 //        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
 //        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
@@ -13,7 +14,8 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
-        classpath 'com.mob.sdk:MobSDK:2018.0319.1724'
+        classpath 'com.mob.sdk:MobSDK:+'
+//        classpath 'com.mob.sdk:MobSDK:2018.0319.1724'
         
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -25,6 +27,11 @@ allprojects {
     repositories {
         google()
         jcenter()
+        // 添加下面的内容
+        flatDir {
+            dirs 'libs'
+        }
+
 //        maven { url 'https://plugins.gradle.org/m2/' }
 //        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
 //        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
