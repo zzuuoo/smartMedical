@@ -180,6 +180,7 @@ public class ChooseDoctorActivity extends AppCompatActivity {
 //                volley_result.setText("加载错误"+volleyError);
                 loadingDialog.close();
                 textView.setVisibility(View.VISIBLE);
+                textView.setText("网络错误");
             }
         });
         //将get请求添加到队列中
@@ -227,6 +228,7 @@ public class ChooseDoctorActivity extends AppCompatActivity {
 //                volley_result.setText("加载错误"+volleyError);
                 loadingDialog.close();
                 textView.setVisibility(View.VISIBLE);
+                textView.setText("网络错误");
             }
         });
         //将get请求添加到队列中

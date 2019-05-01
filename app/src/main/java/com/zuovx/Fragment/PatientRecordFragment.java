@@ -23,6 +23,7 @@ import com.zuovx.Activity.MainActivity;
 import com.zuovx.Activity.ShowPatientRecordActivity;
 import com.zuovx.Adapter.PatientRecordAdapter;
 import com.zuovx.Model.PPatientRecord;
+import com.zuovx.Model.Patient;
 import com.zuovx.Model.PatientRecord;
 import com.zuovx.R;
 import com.zuovx.Utils.GlobalVar;
@@ -172,24 +173,28 @@ public class PatientRecordFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
 //                Toast.makeText(getApplicationContext(),newText, Toast.LENGTH_SHORT).show();
-//                searchlist = new ArrayList<Play>();
-//                for(int i=0;i<list.size();i++){
-//                    if(list.get(i).getPlay_name().contains(newText)){
-//                        searchlist.add(list.get(i));
-//                    }
-//                }
-//                if(searchlist.size()>0&&newText.length()>0){
-//                    adapter = new PlayAdapter(MyApplication.getContext(),R.layout.play_item,searchlist);
-//                    listView.setAdapter(adapter);
-//                    isSearch=true;
-//
-//                }
-//                if(newText.length()==0)
-//                {
-//                    adapter = new PlayAdapter(MyApplication.getContext(),R.layout.play_item,list);
-//                    listView.setAdapter(adapter);
-//                    isSearch=false;
-//                }
+                searchList = new ArrayList<>();
+                for(int i=0;i<list1.size();i++){
+                    if(list.get(i).getAdmissionTime().contains(newText)){
+                        searchList.add(list1.get(i));
+                    }
+                }
+                if(searchList.size()>0&&newText.length()>0){
+                    PatientRecordAdapter adapter =
+                            new PatientRecordAdapter(getActivity(),
+                                    R.layout.patient_record_item,searchList);
+                    listView.setAdapter(adapter);
+                    isSearch=true;
+
+                }
+                if(newText.length()==0)
+                {
+                    PatientRecordAdapter adapter =
+                            new PatientRecordAdapter(getActivity(),
+                                    R.layout.patient_record_item,list1);
+                    listView.setAdapter(adapter);
+                    isSearch=false;
+                }
                 return false;
             }
         });
@@ -224,9 +229,12 @@ public class PatientRecordFragment extends Fragment {
                 }else{
                     textView.setVisibility(View.GONE);
                     list1 = new ArrayList<>();
+                    Patient patient = new Patient();
+                    patient.setAccount(MainActivity.user.getAccount());
                     for(int i=0;i<list.size();i++){
                         PPatientRecord p = new PPatientRecord();
                         p.setPatientRecord(list.get(i));
+                        p.setPatient(patient);
                         list1.add(p);
                     }
                     PatientRecordAdapter adapter =

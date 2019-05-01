@@ -47,8 +47,14 @@ public class ShowPatientRecordActivity extends AppCompatActivity {
                 diagnosis.setText(pPatientRecord.getPatientRecord().getDiagnosis());
             }
             if(pPatientRecord.getPatient()!=null){
-                pname.setText(pPatientRecord.getPatient().getName());
+                if(pPatientRecord.getPatient().getName()!=null&&!pPatientRecord.getPatient().getName().equals("")){
+                    pname.setText(pPatientRecord.getPatient().getName());
+                }else{
+                    pname.setText(pPatientRecord.getPatient().getAccount());
+                }
+
             }
+
 
         }
         setUnEditAble();

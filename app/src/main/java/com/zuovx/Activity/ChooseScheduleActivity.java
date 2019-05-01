@@ -85,6 +85,8 @@ public class ChooseScheduleActivity extends AppCompatActivity {
                         Toast.makeText(ChooseScheduleActivity.this,"预约失败",Toast.LENGTH_SHORT).show();
                         break;
                     case 3:
+                        loadingDialog.close();
+                        Toast.makeText(ChooseScheduleActivity.this,"预约失败，已经预约过或者跟已预约的时间段冲突",Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
@@ -158,7 +160,7 @@ public class ChooseScheduleActivity extends AppCompatActivity {
 //                Intent intent = new Intent(BookActivity.this,ChooseDoctorActivity.class);
 //                intent.putExtra("sectionId",section.getSectionId());
 //                startActivity(intent);
-                if(doctorSche.getSchedule().getRemainder()>1) {
+                if(doctorSche.getSchedule().getRemainder()>0) {
 
                     AlertDialog.Builder dialog = new AlertDialog.Builder(ChooseScheduleActivity.this);
                     dialog.setTitle("确认预约吗？");
@@ -219,6 +221,7 @@ public class ChooseScheduleActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError volleyError) {
 //                volley_result.setText("加载错误"+volleyError);
                 loadingDialog.close();
+//                textView.setText("网络错误");
             }
         });
         //将get请求添加到队列中
@@ -277,6 +280,7 @@ public class ChooseScheduleActivity extends AppCompatActivity {
 //                volley_result.setText("加载错误"+volleyError);
                 loadingDialog.close();
                 textView.setVisibility(View.VISIBLE);
+                textView.setText("网络错误");
             }
         });
         //将get请求添加到队列中
@@ -339,6 +343,10 @@ public class ChooseScheduleActivity extends AppCompatActivity {
                         Message message = new Message();
                         message.what = 1;
                         handler.sendMessage(message);
+                        }else if(s!=null&&s.equals("2")){
+                            Message message = new Message();
+                            message.what = 3;
+                            handler.sendMessage(message);
                         }else{
                             Message message = new Message();
                             message.what = 2;

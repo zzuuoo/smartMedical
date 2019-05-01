@@ -11,7 +11,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.zuovx"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -46,4 +46,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'com.google.code.gson:gson:2.4'
     implementation files('libs/volley.jar')
+
+    // 添加下面的内容
+    implementation (name: 'alipaySdk-15.6.2-20190416165100-noUtdid', ext: 'aar')
 }

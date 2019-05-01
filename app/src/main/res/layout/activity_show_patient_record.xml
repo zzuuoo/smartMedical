@@ -42,7 +42,7 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:text="病人姓名："
+            android:text="患者："
             android:textColor="#000000"
             android:textSize="20dp"/>
         <TextView
