@@ -1,6 +1,5 @@
 package com.zuovx.Fragment;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -43,12 +42,12 @@ public class VisitFragment extends Fragment implements View.OnClickListener {
         View v = inflater.inflate(R.layout.fragment_visit, container, false);
         myregistration = (Button) v.findViewById(R.id.myregistration);
         myregistration.setOnClickListener(this);
-        guide = (Button)v.findViewById(R.id.guide);
-        guide.setOnClickListener(this);
+//        guide = (Button)v.findViewById(R.id.guide);
+//        guide.setOnClickListener(this);
         appointment = (Button)v.findViewById(R.id.appointment);
         appointment.setOnClickListener(this);
-        mart = (Button)v.findViewById(R.id.mart);
-        mart.setOnClickListener(this);
+//        mart = (Button)v.findViewById(R.id.mart);
+//        mart.setOnClickListener(this);
         return v;
     }
 
@@ -66,22 +65,22 @@ public class VisitFragment extends Fragment implements View.OnClickListener {
                 Intent intentm = new Intent(getActivity(),MyBookActivity.class);
                 startActivity(intentm);
                 break;
-            case R.id.guide:
-                //预约指引
-                AlertDialog.Builder dialog1 = new AlertDialog.Builder(getContext());
-                dialog1.setTitle("预约指引");
-                dialog1.setMessage("待完成");
-                dialog1.setCancelable(true);
-                dialog1.show();
-                break;
-            case R.id.mart:
-                //智能导诊
-                AlertDialog.Builder dialog12 = new AlertDialog.Builder(getContext());
-                dialog12.setTitle("智能导诊");
-                dialog12.setMessage("待完成");
-                dialog12.setCancelable(true);
-                dialog12.show();
-                break;
+//            case R.id.guide:
+//                //预约指引
+//                AlertDialog.Builder dialog1 = new AlertDialog.Builder(getContext());
+//                dialog1.setTitle("预约指引");
+//                dialog1.setMessage("待完成");
+//                dialog1.setCancelable(true);
+//                dialog1.show();
+//                break;
+//            case R.id.mart:
+//                //智能导诊
+//                AlertDialog.Builder dialog12 = new AlertDialog.Builder(getContext());
+//                dialog12.setTitle("智能导诊");
+//                dialog12.setMessage("待完成");
+//                dialog12.setCancelable(true);
+//                dialog12.show();
+//                break;
             case R.id.appointment:
                 //预约挂号
                 Intent intent  = new Intent(getContext(),BookActivity.class);

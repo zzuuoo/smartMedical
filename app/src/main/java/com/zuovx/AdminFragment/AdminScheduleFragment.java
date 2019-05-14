@@ -165,6 +165,10 @@ public class AdminScheduleFragment extends Fragment implements View.OnClickListe
                 }else{
                     doctorSche = doctorSches.get(i);
                 }
+                if(doctorSche.getSchedule().getIsCancle()==true){
+                    Toast.makeText(getActivity(),"本来已取消",Toast.LENGTH_SHORT).show();
+                    return true;
+                }
                 final int id = doctorSche.getSchedule().getScheduleId();
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
                 dialog.setTitle("警告");

@@ -42,6 +42,14 @@
             android:textColor="#000000"
             android:textSize="20dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/saflag"
+            android:layout_gravity="center_vertical"
+            android:textSize="15dp"
+            android:textColor="@color/red"/>
+
     </LinearLayout>
     <ImageView
         android:layout_width="fill_parent"
