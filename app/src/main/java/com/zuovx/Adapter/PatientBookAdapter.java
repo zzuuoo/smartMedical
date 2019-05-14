@@ -46,7 +46,9 @@ public class PatientBookAdapter extends ArrayAdapter<BookPatientSche> {
             holder = (PatientBookAdapter.ViewHolder)convertView.getTag();
         }
         holder.name.setText(bookDocSche.getPatient().getName());
-        if(bookDocSche.getPatient().getSex()==0){
+        if(bookDocSche.getPatient()==null||bookDocSche.getPatient().getSex()==null){
+            holder.sex.setText("未设置");
+        } else if(bookDocSche.getPatient().getSex()==0){
             holder.sex.setText("女");
         }else{
             holder.sex.setText("男");

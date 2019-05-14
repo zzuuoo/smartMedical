@@ -14,7 +14,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
-        classpath 'com.mob.sdk:MobSDK:+'
+//        classpath 'com.mob.sdk:MobSDK:+'
 //        classpath 'com.mob.sdk:MobSDK:2018.0319.1724'
         
 
@@ -31,7 +31,7 @@ allprojects {
         flatDir {
             dirs 'libs'
         }
-
+//        maven { url "https://dl.bintray.com/dqzhai/payelves-maven" }
 //        maven { url 'https://plugins.gradle.org/m2/' }
 //        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
 //        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }

@@ -32,7 +32,10 @@ import com.zuovx.Utils.ActivityCollector;
 import com.zuovx.Utils.GlobalVar;
 import com.zuovx.Utils.LoadingDialog;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -142,22 +145,38 @@ public class MyBookActivity extends AppCompatActivity implements View.OnClickLis
                     bookDocSche=books.get(i);
                 }
                 final Book book = bookDocSche.getBook();
-                AlertDialog.Builder dialog = new AlertDialog.Builder(MyBookActivity.this);
-                dialog.setTitle("警告");
-                dialog.setMessage("确认取消吗？");
-                dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        cancleBook(book);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-DD HH:MM:SS");
+                Date bd=null;
+                try {
+                    bd = simpleDateFormat.parse(book.getBookTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if(bd!=null){
+                    if(bd.getTime()>new Date().getTime()){
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(MyBookActivity.this);
+                        dialog.setTitle("警告");
+                        dialog.setMessage("确认取消吗？");
+                        dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                cancleBook(book);
+                            }
+                        });
+                        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Toast.makeText(getApplicationContext(), "取消", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        dialog.show();
+                    }else{
+                        Toast.makeText(MyBookActivity.this,"已失效,不可取消",Toast.LENGTH_SHORT).show();
                     }
-                });
-                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(getApplicationContext(), "取消", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                dialog.show();
+                }else{
+                    Toast.makeText(MyBookActivity.this,"已失效,不可取消",Toast.LENGTH_SHORT).show();
+                }
+
                 return true;
             }
         });

@@ -19,6 +19,7 @@ public class ScheduleAdapter extends ArrayAdapter<DoctorSche> {
         TextView name;
         TextView count;
         TextView when;
+        TextView f;
 
     }
     private int resourceid;
@@ -40,6 +41,7 @@ public class ScheduleAdapter extends ArrayAdapter<DoctorSche> {
             holder.name = view.findViewById(R.id.schedule_doctor_name);
             holder.count = view.findViewById(R.id.schedule_appoint_count);
             holder.when = view.findViewById(R.id.schedule_item_when);
+            holder.f = view.findViewById(R.id.saflag);
             convertView.setTag(holder);
         }else{
             view = convertView;
@@ -52,6 +54,9 @@ public class ScheduleAdapter extends ArrayAdapter<DoctorSche> {
             w = "  下午";
         }
         holder.when.setText(schedule.getSchedule().getWorkTimeStart()+w);
+        if(schedule.getSchedule().getIsCancle()==true){
+            holder.f.setText("已取消");
+        }
         return convertView;
     }
 }

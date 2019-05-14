@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.mob.sdk'
+//apply plugin: 'com.mob.sdk'
 
-MobSDK {
-    appKey "292b032d19ba8"
-    appSecret "707a9e3055afb14f66e94169a9823a71"
-    SMSSDK {}
-}
+//MobSDK {
+//    appKey "292b032d19ba8"
+//    appSecret "707a9e3055afb14f66e94169a9823a71"
+//    SMSSDK {}
+//}
 
 android {
     compileSdkVersion 27
@@ -49,4 +49,6 @@ dependencies {
 
     // 添加下面的内容
     implementation (name: 'alipaySdk-15.6.2-20190416165100-noUtdid', ext: 'aar')
+//    implementation 'com.payelves:sdk-release:3.3.9'
+
 }
