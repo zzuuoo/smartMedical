@@ -7,6 +7,7 @@ public class PatientRecord implements Serializable {
     private int patientRecordId;
     private int patientId;
     private int doctorId;
+    private int scheduleId;
     private String admissionTime;//入院时间
     private String chief;//主诉
     private String nowHistory;//现病史
@@ -16,6 +17,14 @@ public class PatientRecord implements Serializable {
     private String physicalExamination;//体格检查
     private String therapeuticExamination;//辅助检查
     private String diagnosis;//初步/最后诊断
+
+    public int getScheduleId() {
+        return scheduleId;
+    }
+
+    public void setScheduleId(int scheduleId) {
+        this.scheduleId = scheduleId;
+    }
 
     public int getPatientRecordId() {
         return patientRecordId;

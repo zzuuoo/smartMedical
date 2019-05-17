@@ -244,8 +244,8 @@ public class ChooseScheduleActivity extends AppCompatActivity {
 
                     AlertDialog.Builder dialog = new AlertDialog.Builder(ChooseScheduleActivity.this);
                     dialog.setTitle("确认预约吗？");
-                    dialog.setMessage("预约须知：同一天你只能预约两次," +
-                            "预约成功而不赴约的，超过两次则拉入黑名单，确认预约吗？。");
+                    dialog.setMessage("预约须知：" +
+                            "预约成功而不赴约的，超过两次则拉入黑名单，确认预约吗？");
                     dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -473,7 +473,7 @@ public class ChooseScheduleActivity extends AppCompatActivity {
      */
     private void bookWithVolley(final String account, final String scheduleId)
     {
-        loadingDialog = new LoadingDialog(this,"预约中...");
+        loadingDialog = new LoadingDialog(this,"支付中...");
         loadingDialog.show();
         requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(

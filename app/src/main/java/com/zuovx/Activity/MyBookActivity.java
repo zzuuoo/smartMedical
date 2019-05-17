@@ -145,14 +145,16 @@ public class MyBookActivity extends AppCompatActivity implements View.OnClickLis
                     bookDocSche=books.get(i);
                 }
                 final Book book = bookDocSche.getBook();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-DD HH:MM:SS");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd");
                 Date bd=null;
                 try {
-                    bd = simpleDateFormat.parse(book.getBookTime());
+                    bd = simpleDateFormat.parse(bookDocSche.getSchedule().getWorkTimeStart());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+                System.out.println(bookDocSche.getSchedule().getWorkTimeStart());
                 if(bd!=null){
+                    System.out.println(bd.getTime());
                     if(bd.getTime()>new Date().getTime()){
                         AlertDialog.Builder dialog = new AlertDialog.Builder(MyBookActivity.this);
                         dialog.setTitle("警告");

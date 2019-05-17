@@ -1,11 +1,9 @@
 package com.zuovx.DoctorFragment;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +12,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -153,30 +150,30 @@ public class DoctorMainFragment extends Fragment implements View.OnClickListener
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //删除
-                DoctorSche doctorSche =null;
-                if(isSearch)
-                {
-                    doctorSche = doctorSchesSeach.get(i);
-                }else{
-                    doctorSche = doctorSches.get(i);
-                }
-                final int id = doctorSche.getSchedule().getScheduleId();
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                dialog.setTitle("警告");
-                dialog.setMessage("确认删除吗？请慎重，会影响用户挂号订单！！！");
-                dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        deleteSchedule(id);
-                    }
-                });
-                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(getContext(), "取消", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                dialog.show();
+//                DoctorSche doctorSche =null;
+//                if(isSearch)
+//                {
+//                    doctorSche = doctorSchesSeach.get(i);
+//                }else{
+//                    doctorSche = doctorSches.get(i);
+//                }
+//                final int id = doctorSche.getSchedule().getScheduleId();
+//                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+//                dialog.setTitle("警告");
+//                dialog.setMessage("确认删除吗？请慎重，会影响用户挂号订单！！！");
+//                dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+////                        deleteSchedule(id);
+//                    }
+//                });
+//                dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        Toast.makeText(getContext(), "取消", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//                dialog.show();
 //                deleteSchedule(doctorSche.getSchedule().getScheduleId());
                 return true;
             }
