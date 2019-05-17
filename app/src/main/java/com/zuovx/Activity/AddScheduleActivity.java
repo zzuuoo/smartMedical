@@ -74,14 +74,14 @@ public class AddScheduleActivity extends AppCompatActivity implements View.OnCli
                     case 1:
                         AddScheduleActivity.this.setResult(1);
                         dialog.close();
-//                        Toast.makeText(EditScheduleActivity.this,"生成票成功",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddScheduleActivity.this,"成功",Toast.LENGTH_SHORT).show();
 
                         finish();
                         break;
                     case 2:
                         AddScheduleActivity.this.setResult(0);
                         dialog.close();
-
+                        Toast.makeText(AddScheduleActivity.this,"失败",Toast.LENGTH_SHORT).show();
                         finish();
                     case 3:
                         dialog.close();

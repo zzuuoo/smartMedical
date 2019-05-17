@@ -122,7 +122,7 @@ public class DoctorManagerActivity extends AppCompatActivity implements View.OnC
                 }
                 AlertDialog.Builder dialog = new AlertDialog.Builder(DoctorManagerActivity.this);
                 dialog.setTitle("警告");
-                dialog.setMessage("确认删除吗？");
+                dialog.setMessage("注意！删除该医生同时会删除对应的值班安排，确认删除吗？");
                 dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

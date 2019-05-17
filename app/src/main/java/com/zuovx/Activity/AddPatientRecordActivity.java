@@ -66,10 +66,12 @@ public class AddPatientRecordActivity extends AppCompatActivity implements View.
                         finish();
                         break;
                     case 3:
+                        Toast.makeText(AddPatientRecordActivity.this,"succeed",Toast.LENGTH_SHORT).show();
                         initPatintRecord();
                         loadingDialog.close();
                         break;
                     case 4:
+                        Toast.makeText(AddPatientRecordActivity.this,"error",Toast.LENGTH_SHORT).show();
                         loadingDialog.close();
                         break;
                 }
@@ -219,6 +221,7 @@ public class AddPatientRecordActivity extends AppCompatActivity implements View.
             @Override
             public void onErrorResponse(VolleyError volleyError) {
 
+                Toast.makeText(AddPatientRecordActivity.this,"error",Toast.LENGTH_SHORT).show();
                 AddPatientRecordActivity.this.setResult(0);
                 Message message1 = new Message();
                 message1.what = 2;
@@ -230,6 +233,7 @@ public class AddPatientRecordActivity extends AppCompatActivity implements View.
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("patientId",String.valueOf(bookPatientSche.getPatient().getPatientId()));
                 map.put("doctorId",String.valueOf(bookPatientSche.getSchedule().getDoctorId()));
+                map.put("scheduleId",String.valueOf(bookPatientSche.getSchedule().getScheduleId()));
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
                 String date = bookPatientSche.getSchedule().getWorkTimeStart();
@@ -292,6 +296,7 @@ public class AddPatientRecordActivity extends AppCompatActivity implements View.
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("patientId",String.valueOf(bookPatientSche.getPatient().getPatientId()));
                 map.put("doctorId",String.valueOf(bookPatientSche.getSchedule().getDoctorId()));
+                map.put("scheduleId",String.valueOf(bookPatientSche.getSchedule().getScheduleId()));
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 String date = bookPatientSche.getSchedule().getWorkTimeStart();
                 Date d = new Date();
