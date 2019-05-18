@@ -57,7 +57,14 @@ public class PatientBookAdapter extends ArrayAdapter<BookPatientSche> {
         if(bookDocSche.getSchedule().getW() == 2){
             w = "  下午";
         }
-        holder.when.setText(bookDocSche.getSchedule().getWorkTimeStart()+w);
+        if(bookDocSche.getBook().isAvaliablity()){
+            holder.when.setText(bookDocSche.getSchedule().getWorkTimeStart()+w+"    未处理");
+            System.out.println("未处理");
+        }else{
+            System.out.println("已处理");
+            holder.when.setText(bookDocSche.getSchedule().getWorkTimeStart()+w+"    已处理");
+        }
+
         return convertView;
     }
 }

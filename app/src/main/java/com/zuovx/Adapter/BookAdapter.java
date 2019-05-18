@@ -51,7 +51,13 @@ public class BookAdapter extends ArrayAdapter<BookDocSche> {
         if(bookDocSche.getSchedule().getW() == 2){
             w = "  下午";
         }
-        holder.when.setText(bookDocSche.getSchedule().getWorkTimeStart()+w);
+
+//        if()
+        if(bookDocSche.getBook().isAvaliablity()){
+            holder.when.setText(bookDocSche.getSchedule().getWorkTimeStart()+w);
+        }else{
+            holder.when.setText(bookDocSche.getSchedule().getWorkTimeStart()+w+"    已完成");
+        }
         return convertView;
     }
 }
