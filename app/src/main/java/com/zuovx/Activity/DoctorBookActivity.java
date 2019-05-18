@@ -50,6 +50,11 @@ public class DoctorBookActivity extends AppCompatActivity {
         schedule = (Schedule)intent.getSerializableExtra("schedule");
         init();
     }
+    @Override
+    public void onStart( ) {
+        super.onStart();
+        getBookByScheduleId();
+    }
 
     public void init(){
         //返回键
@@ -86,7 +91,7 @@ public class DoctorBookActivity extends AppCompatActivity {
             }
         });
 
-        getBookByScheduleId();
+//        getBookByScheduleId();
 
     }
     @Override
