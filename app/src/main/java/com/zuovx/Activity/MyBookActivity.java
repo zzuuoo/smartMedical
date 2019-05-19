@@ -155,7 +155,7 @@ public class MyBookActivity extends AppCompatActivity implements View.OnClickLis
                 System.out.println(bookDocSche.getSchedule().getWorkTimeStart());
                 if(bd!=null){
                     System.out.println(bd.getTime());
-                    if(bd.getTime()>new Date().getTime()){
+                    if(bd.getTime()>new Date().getTime()&&book.isAvaliablity()){
                         AlertDialog.Builder dialog = new AlertDialog.Builder(MyBookActivity.this);
                         dialog.setTitle("警告");
                         dialog.setMessage("确认取消吗？");
