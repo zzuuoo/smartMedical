@@ -34,6 +34,7 @@
     <SearchView
         android:layout_width="match_parent"
         android:id="@+id/medical_recordSearchView"
+        android:queryHint="请输入日期、账号或姓名"
         android:layout_height="wrap_content"></SearchView>
     <ImageView
         android:layout_width="fill_parent"

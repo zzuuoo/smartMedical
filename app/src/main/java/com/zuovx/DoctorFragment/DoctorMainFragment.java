@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -30,7 +31,9 @@ import com.zuovx.R;
 import com.zuovx.Utils.GlobalVar;
 import com.zuovx.Utils.LoadingDialog;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,6 +54,9 @@ public class DoctorMainFragment extends Fragment implements View.OnClickListener
     private TextView textView;
     private Button addSchedule;
     private Handler handler;
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+    private Button all,taday,yestaday;
 
     private List<DoctorSche> doctorSches;
     private List<DoctorSche> doctorSchesSeach;
@@ -178,6 +184,32 @@ public class DoctorMainFragment extends Fragment implements View.OnClickListener
                 return true;
             }
         });
+
+        all = view.findViewById(R.id.all_mypoint);
+        taday = view.findViewById(R.id.today_mypoint);
+        yestaday = view.findViewById(R.id.yestaday_mypoint);
+        all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refleshData("all");
+                Toast.makeText(getContext(),"all",Toast.LENGTH_SHORT).show();
+            }
+        });
+        taday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String kt = format.format(new Date());
+                refleshData(kt);
+            }
+        });
+        yestaday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                long day = 86400000l;
+                String kty = format.format(new Date(new Date().getTime()+day));
+                refleshData(kty);
+            }
+        });
     }
     public void getSchedule(){
         //创建一个请求队列
@@ -285,8 +317,62 @@ public class DoctorMainFragment extends Fragment implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId())
         {
+//            case R.id.all_mypoint:
+//                refleshData("all");
+//                break;
+//            case R.id.today_mypoint:
+//                String kt = format.format(new Date());
+//                refleshData(kt);
+//                break;
+//            case R.id.yestaday_mypoint:
+//                long day = 86400000l;
+//                String kty = format.format(new Date(new Date().getTime()-day));
+//                refleshData(kty);
+//                break;
                 default:
                     break;
+        }
+    }
+
+    public void refleshData(String newText){
+//        Toast.makeText(getContext(),newText,Toast.LENGTH_SHORT).show();
+        if(newText.equals("all")){
+            scheduleAdapter = new ScheduleAdapter(getActivity(),
+                    R.layout.schedule_item,doctorSches);
+            listView.setAdapter(scheduleAdapter);
+            isSearch=false;
+            return;
+        }
+        doctorSchesSeach = new ArrayList<>();
+        if(doctorSches==null){
+            return ;
+        }
+        for(int i=0;i<doctorSches.size();i++){
+            String t ;
+            if(doctorSches.get(i).getSchedule().getW()==1){
+                t = "上午";
+            }else{
+                t = "下午";
+            }
+            t = doctorSches.get(i).getSchedule().getWorkTimeStart()+ " "+t;
+            if(t.contains(newText)){
+                doctorSchesSeach.add(doctorSches.get(i));
+            }
+        }
+        if(doctorSchesSeach.size()>0&&newText.length()>0){
+            scheduleAdapter = new ScheduleAdapter(getActivity(),
+                    R.layout.schedule_item,doctorSchesSeach);
+            listView.setAdapter(scheduleAdapter);
+            isSearch=true;
+
+        }
+        if(newText.length()==0||doctorSchesSeach.size()==0)
+        {
+            scheduleAdapter = new ScheduleAdapter(getActivity(),
+                    R.layout.schedule_item,doctorSches);
+            listView.setAdapter(scheduleAdapter);
+            isSearch=false;
+            Toast.makeText(getContext(),"没有符合条件的",Toast.LENGTH_SHORT).show();
         }
     }
 

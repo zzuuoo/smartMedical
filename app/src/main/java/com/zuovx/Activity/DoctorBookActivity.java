@@ -25,19 +25,22 @@ import com.zuovx.Utils.ActivityCollector;
 import com.zuovx.Utils.GlobalVar;
 import com.zuovx.Utils.LoadingDialog;
 
+import java.util.ArrayList;
 import java.util.List;
-
+//todo 加个搜索功能
 public class DoctorBookActivity extends AppCompatActivity {
 
     private int doctorId,scheduleId;
     private RequestQueue requestQueue;
     private LoadingDialog loadingDialog;
-    private List<BookPatientSche> books;
+    private List<BookPatientSche> books,searchBooks;
     private Toolbar toolbar;
     private SearchView searchView;
     private TextView textView;
     private ListView listView;
     private Schedule schedule;
+    private PatientBookAdapter adapter;
+    private boolean isSearch = false;
 //    private BookAdapter bookAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +93,41 @@ public class DoctorBookActivity extends AppCompatActivity {
                 return true;
             }
         });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+//                Toast.makeText(getApplicationContext(),newText, Toast.LENGTH_SHORT).show();
+                searchBooks = new ArrayList<>();
+                for(int i=0;i<books.size();i++){
+                    if(books.get(i).getPatient().getName().contains(newText)
+                            ||books.get(i).getPatient().getAccount().contains(newText)
+                            ||books.get(i).getBook().getBookTime().contains(newText)){
+                        searchBooks.add(books.get(i));
+                    }
+                }
+                if(searchBooks.size()>0&&newText.length()>0){
+                    isSearch=true;
+                    adapter = new PatientBookAdapter(DoctorBookActivity.this,
+                                    R.layout.book_patient_item,searchBooks);
+                    listView.setAdapter(adapter);
+
+                }
+                if(newText.length()==0)
+                {
+                    adapter = new PatientBookAdapter(DoctorBookActivity.this,
+                                    R.layout.book_patient_item,books);
+                    listView.setAdapter(adapter);
+                    isSearch=false;
+
+                }
+                return false;
+            }
+        });
 //        getBookByScheduleId();
 
     }
@@ -127,10 +164,9 @@ public class DoctorBookActivity extends AppCompatActivity {
                     textView.setVisibility(View.VISIBLE);
                 }else{
                     textView.setVisibility(View.GONE);
-                    PatientBookAdapter patientBookAdapter =
-                            new PatientBookAdapter(DoctorBookActivity.this,
+                    adapter = new PatientBookAdapter(DoctorBookActivity.this,
                             R.layout.book_patient_item,books);
-                    listView.setAdapter(patientBookAdapter);
+                    listView.setAdapter(adapter);
                 }
 
             }

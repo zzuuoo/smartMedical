@@ -31,11 +31,32 @@
             <!--android:text="值班安排"/>-->
     </android.support.v7.widget.Toolbar>
 
-    <SearchView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:id="@+id/doctor_schedule_searchView"
-        android:queryHint="请输入日期或医生"
-        android:layout_height="wrap_content"></SearchView>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/all_mypoint"
+            android:text="所有"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/today_mypoint"
+            android:text="今天"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/yestaday_mypoint"
+            android:text="明天"/>
+        <SearchView
+            android:layout_width="match_parent"
+            android:id="@+id/doctor_schedule_searchView"
+            android:queryHint="请输入日期"
+            android:layout_height="wrap_content"></SearchView>
+    </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
