@@ -35,7 +35,7 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
     private TextView userNickName;
     private ImageView head_image;
     private RelativeLayout personalData;
-    private ListMenuItemView userOrder;
+//    private ListMenuItemView userOrder;
     private ListMenuItemView logout;
 //    private ListMenuItemView outpatientRecharge;
     private ListMenuItemView medicalFeedBack;
@@ -120,21 +120,21 @@ public class PersonalFragment extends Fragment implements View.OnClickListener {
                 }
             }
         });
-        userOrder= view.findViewById(R.id.MyOrder);
-        userOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!MainActivity.isLogin)
-                {
-                    Toast.makeText(getContext(),"未登录，请先登录",Toast.LENGTH_SHORT).show();
-
-                }else{
-                    Toast.makeText(getContext(),"订单信息",Toast.LENGTH_LONG).show();
-                }
-//                Toast.makeText(getContext(),"订单信息",Toast.LENGTH_LONG).show();
-//                startActivity(new Intent(getContext(), ShowSaleActivity.class));
-            }
-        });
+//        userOrder= view.findViewById(R.id.MyOrder);
+//        userOrder.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(!MainActivity.isLogin)
+//                {
+//                    Toast.makeText(getContext(),"未登录，请先登录",Toast.LENGTH_SHORT).show();
+//
+//                }else{
+//                    Toast.makeText(getContext(),"订单信息",Toast.LENGTH_LONG).show();
+//                }
+////                Toast.makeText(getContext(),"订单信息",Toast.LENGTH_LONG).show();
+////                startActivity(new Intent(getContext(), ShowSaleActivity.class));
+//            }
+//        });
         personalData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -37,6 +37,7 @@ import com.zuovx.Utils.AuthResult;
 import com.zuovx.Utils.GlobalVar;
 import com.zuovx.Utils.LoadingDialog;
 import com.zuovx.Utils.OrderInfoUtil2_0;
+import com.zuovx.Utils.PayDialog;
 import com.zuovx.Utils.PayResult;
 
 import java.text.ParseException;
@@ -250,7 +251,8 @@ public class ChooseScheduleActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
 
-                            bookWithVolley(MainActivity.user.getAccount(), did);
+                            showPayWay(MainActivity.user.getAccount(), did);
+//                            bookWithVolley(MainActivity.user.getAccount(), did);
                         }
                     });
                     dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -414,6 +416,33 @@ public class ChooseScheduleActivity extends AppCompatActivity {
         ActivityCollector.removeActivity(this);
     }
 
+    public void showPayWay(final String account,final String did){
+        new PayDialog(ChooseScheduleActivity.this)
+                .setData(20, 30)
+                .haveWXPay(true)
+                .haveAliPay(true)
+                .haveBalance(false)
+                .setListener(new PayDialog.OnPayClickListener() {
+                    @Override
+                    public void onPayClick(int payType) {
+                        switch (payType) {
+                            case PayDialog.ALI_PAY:
+                                bookWithVolley(account, did);
+//                                Toast.makeText(ChooseScheduleActivity.this, "支付宝支付成功", Toast.LENGTH_LONG).show();
+                                break;
+                            case PayDialog.WX_PAY:
+                                bookWithVolley(account, did);
+//                                Toast.makeText(ChooseScheduleActivity.this, "微信支付成功", Toast.LENGTH_LONG).show();
+                                break;
+                            case PayDialog.BALANCE_PAY:
+                                bookWithVolley(account, did);
+//                                Toast.makeText(ChooseScheduleActivity.this, "余额支付成功", Toast.LENGTH_LONG).show();
+                                break;
+                        }
+                    }
+                }).show();
+    }
+
 
     /**
      * 支付宝支付业务
@@ -473,7 +502,7 @@ public class ChooseScheduleActivity extends AppCompatActivity {
      */
     private void bookWithVolley(final String account, final String scheduleId)
     {
-        loadingDialog = new LoadingDialog(this,"支付中...");
+        loadingDialog = new LoadingDialog(this,"预约中...");
         loadingDialog.show();
         requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(

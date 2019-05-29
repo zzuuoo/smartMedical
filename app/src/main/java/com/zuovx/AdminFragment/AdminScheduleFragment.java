@@ -114,6 +114,9 @@ public class AdminScheduleFragment extends Fragment implements View.OnClickListe
             public boolean onQueryTextChange(String newText) {
 //                Toast.makeText(getApplicationContext(),newText, Toast.LENGTH_SHORT).show();
                 doctorSchesSeach = new ArrayList<>();
+                if(doctorSches==null){
+                    return false;
+                }
                 for(int i=0;i<doctorSches.size();i++){
                     if(doctorSches.get(i).getSchedule().getWorkTimeStart().contains(newText)||
                             doctorSches.get(i).getDoctor().getName().contains(newText)){

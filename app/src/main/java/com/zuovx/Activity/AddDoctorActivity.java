@@ -16,9 +16,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
@@ -32,6 +35,7 @@ import com.zuovx.Utils.LoadingDialog;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -144,7 +148,8 @@ public class AddDoctorActivity extends AppCompatActivity implements View.OnClick
         requestQueue = Volley.newRequestQueue(AddDoctorActivity.this);
         //创建一个请求
 
-        StringRequest stringRequest =new StringRequest(GlobalVar.url +"section/getAllSection", new Response.Listener<String>() {
+        StringRequest stringRequest =new StringRequest(GlobalVar.url +"section/getAllSection",
+                new Response.Listener<String>() {
             //正确接收数据回调
             @Override
             public void onResponse(String s) {
@@ -286,6 +291,29 @@ public class AddDoctorActivity extends AppCompatActivity implements View.OnClick
                 return map;
             }
 
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                try {
+
+                    Map<String, String> responseHeaders = response.headers;
+                    String rawCookies = responseHeaders.get("vxflag");
+//                    saveSettingNote(Config.Cookie,rawCookies);//保存Cookie-saveSettingNote是本地存储
+                    Log.i("px",rawCookies+"\n");
+
+                    String dataString = new String(response.data, "UTF-8");
+                    Log.i("px",dataString);
+                    return Response.success(dataString, HttpHeaderParser.parseCacheHeaders(response));
+                } catch (UnsupportedEncodingException e) {
+                    return Response.error(new ParseError(e));
+                }
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> map = new HashMap<>();
+                map.put("vxflag","f71e5f1e08cd5a7e42a7e9aa70d22458");
+                return map;
+            }
         };
 
         requestQueue.add(stringRequest);
